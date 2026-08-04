@@ -180,12 +180,12 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 
 /* ===== EVENTS V2 — vertical flow timeline ===== */
 .flow{position:relative;max-width:1440px;margin:0 auto;padding:0 40px}
-.flow-line{position:absolute;left:194px;top:0;height:0;width:2px;background:var(--line)}
-.flow-fill{position:absolute;left:194px;top:0;width:2px;height:0;background:var(--navy);z-index:1}
-.fstep{position:relative;display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1.15fr);gap:40px;align-items:center;min-height:80vh}
-.fdot{position:absolute;left:154px;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#cfd3d8;border:3px solid var(--paper);z-index:2;transition:background .4s var(--ease),transform .4s var(--ease)}
+.flow-line{position:absolute;left:222px;top:0;height:0;width:2px;background:var(--line)}
+.flow-fill{position:absolute;left:222px;top:0;width:2px;height:0;background:var(--navy);z-index:1}
+.fstep{position:relative;display:grid;grid-template-columns:168px minmax(0,1fr) minmax(0,1.12fr);gap:40px;align-items:center;min-height:80vh}
+.fdot{position:absolute;left:182px;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#cfd3d8;border:3px solid var(--paper);z-index:2;transition:background .4s var(--ease),transform .4s var(--ease)}
 .fstep.active .fdot{background:var(--navy);transform:translate(-50%,-50%) scale(1.35)}
-.fdate-side{grid-column:1;justify-self:end;text-align:right;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#9aa0a8;white-space:nowrap;transition:color .4s var(--ease)}
+.fdate-side{grid-column:1;justify-self:end;text-align:right;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;line-height:20px;letter-spacing:.04em;text-transform:uppercase;color:#9aa0a8;white-space:nowrap;transition:color .4s var(--ease)}
 .fstep.active .fdate-side{color:var(--navy)}
 .fcontent{grid-column:2;opacity:.5;transition:opacity .5s var(--ease)}
 .fstep.active .fcontent{opacity:1}
@@ -204,7 +204,7 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
  .flow-line,.flow-fill{left:116px}
  .fstep{grid-template-columns:86px 1fr;gap:14px;min-height:auto;padding:44px 0}
  .fdot{left:92px}
- .fdate-side{font-size:11px;letter-spacing:.03em;white-space:normal}
+ .fdate-side{font-size:12px;letter-spacing:.03em;white-space:normal}
  .fcontent{opacity:1}
  .fmedia{grid-column:1 / -1;margin-top:18px;opacity:1;transform:none;aspect-ratio:16/10}
  .fcontent p{max-width:none}
