@@ -180,15 +180,13 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 
 /* ===== EVENTS V2 — vertical flow timeline ===== */
 .flow{position:relative;max-width:1440px;margin:0 auto;padding:0 40px}
-.flow-line{position:absolute;left:178px;top:0;height:0;width:2px;background:var(--line)}
-.flow-fill{position:absolute;left:178px;top:0;width:2px;height:0;background:var(--navy);z-index:1}
-.fstep{position:relative;display:grid;grid-template-columns:118px minmax(0,1fr) minmax(0,1.15fr);gap:40px;align-items:center;min-height:80vh}
-.fdot{position:absolute;left:138px;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#cfd3d8;border:3px solid var(--paper);z-index:2;transition:background .4s var(--ease),transform .4s var(--ease)}
+.flow-line{position:absolute;left:194px;top:0;height:0;width:2px;background:var(--line)}
+.flow-fill{position:absolute;left:194px;top:0;width:2px;height:0;background:var(--navy);z-index:1}
+.fstep{position:relative;display:grid;grid-template-columns:140px minmax(0,1fr) minmax(0,1.15fr);gap:40px;align-items:center;min-height:80vh}
+.fdot{position:absolute;left:154px;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#cfd3d8;border:3px solid var(--paper);z-index:2;transition:background .4s var(--ease),transform .4s var(--ease)}
 .fstep.active .fdot{background:var(--navy);transform:translate(-50%,-50%) scale(1.35)}
-.fdate-side{grid-column:1;justify-self:end;text-align:right}
-.fdate-side .mo{font-family:'Mesmerize',sans-serif;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#b8bcc2;margin-bottom:3px;transition:color .4s var(--ease)}
-.fdate-side .dy{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:38px;line-height:1;color:#9aa0a8;white-space:nowrap;transition:color .4s var(--ease)}
-.fstep.active .fdate-side .mo,.fstep.active .fdate-side .dy{color:var(--navy)}
+.fdate-side{grid-column:1;justify-self:end;text-align:right;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:#9aa0a8;white-space:nowrap;transition:color .4s var(--ease)}
+.fstep.active .fdate-side{color:var(--navy)}
 .fcontent{grid-column:2;opacity:.5;transition:opacity .5s var(--ease)}
 .fstep.active .fcontent{opacity:1}
 .fcontent h3{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:23px;line-height:30px;letter-spacing:0;text-transform:uppercase;color:var(--ink);margin:0 0 12px;text-wrap:balance}
@@ -203,11 +201,10 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .fmedia .fcat i{width:8px;height:8px;border-radius:50%}
 @media(max-width:900px){
  .flow{padding:0 24px}
- .flow-line,.flow-fill{left:100px}
- .fstep{grid-template-columns:60px 1fr;gap:14px;min-height:auto;padding:44px 0}
- .fdot{left:76px}
- .fdate-side .dy{font-size:18px}
- .fdate-side .mo{font-size:11px}
+ .flow-line,.flow-fill{left:116px}
+ .fstep{grid-template-columns:86px 1fr;gap:14px;min-height:auto;padding:44px 0}
+ .fdot{left:92px}
+ .fdate-side{font-size:11px;letter-spacing:.03em;white-space:normal}
  .fcontent{opacity:1}
  .fmedia{grid-column:1 / -1;margin-top:18px;opacity:1;transform:none;aspect-ratio:16/10}
  .fcontent p{max-width:none}
@@ -305,12 +302,12 @@ var toTop=document.getElementById('to-top');if(toTop)toTop.addEventListener('cli
 
 /* ===== EVENTS V2 flow ===== */
 var EVENTS=[
- {n:1,title:"Lake Tahoe Concours d'Elegance",start:"2025-08-07",end:"2025-08-08",loc:"Lake Tahoe, California",cat:"concours",img:"./assets/ev_tahoe.jpg",desc:"Vintage wooden boats along the West Shore — a morning among the classics."},
- {n:2,title:"Riva Soir&eacute;e",start:"2025-08-09",end:"2025-08-09",loc:"Lake Tahoe, California",cat:"owner",img:"./assets/ev_riva.jpg",desc:"An intimate evening aboard Riva as the sun sets over the lake."},
- {n:3,title:"Pebble Beach Concours d'Elegance",start:"2025-08-16",end:"2025-08-16",loc:"Pebble Beach, California",cat:"concours",img:"./assets/ev_pebble.jpg",desc:"The world's finest motorcars on the 18th fairway at Pebble Beach."},
- {n:4,title:"BRABUS VIP Owners Party",start:"2025-08-16",end:"2025-08-17",loc:"Monterey Peninsula, California",cat:"owner",img:"./assets/ev_brabus.jpg",desc:"A private owners' celebration in the heart of Monterey Car Week."},
- {n:5,title:"Cannes Yachting Festival",start:"2025-09-08",end:"2025-09-13",loc:"Cannes, France",cat:"boatshow",img:"./assets/ev_cannes.jpg",video:"./assets/past_1.mp4",desc:"First looks at the season's new launches in the Vieux Port."},
- {n:6,title:"Sausalito Boat Show",start:"2025-09-25",end:"2025-09-27",loc:"Sausalito, California",cat:"boatshow",img:"./assets/ev_sausalito.jpg",video:"./assets/past_2.mp4",desc:"Bay-side premieres and sea trials beneath the Golden Gate."}
+ {n:1,title:"Lake Tahoe Concours d'Elegance",start:"2026-08-07",end:"2026-08-08",loc:"Lake Tahoe, California",cat:"concours",img:"./assets/ev_tahoe.jpg",desc:"Vintage wooden boats along the West Shore — a morning among the classics."},
+ {n:2,title:"Riva Soir&eacute;e",start:"2026-08-09",end:"2026-08-09",loc:"Lake Tahoe, California",cat:"owner",img:"./assets/ev_riva.jpg",desc:"An intimate evening aboard Riva as the sun sets over the lake."},
+ {n:3,title:"Pebble Beach Concours d'Elegance",start:"2026-08-16",end:"2026-08-16",loc:"Pebble Beach, California",cat:"concours",img:"./assets/ev_pebble.jpg",desc:"The world's finest motorcars on the 18th fairway at Pebble Beach."},
+ {n:4,title:"BRABUS VIP Owners Party",start:"2026-08-16",end:"2026-08-17",loc:"Monterey Peninsula, California",cat:"owner",img:"./assets/ev_brabus.jpg",desc:"A private owners' celebration in the heart of Monterey Car Week."},
+ {n:5,title:"Cannes Yachting Festival",start:"2026-09-08",end:"2026-09-13",loc:"Cannes, France",cat:"boatshow",img:"./assets/ev_cannes.jpg",video:"./assets/past_1.mp4",desc:"First looks at the season's new launches in the Vieux Port."},
+ {n:6,title:"Sausalito Boat Show",start:"2026-09-25",end:"2026-09-27",loc:"Sausalito, California",cat:"boatshow",img:"./assets/ev_sausalito.jpg",video:"./assets/past_2.mp4",desc:"Bay-side premieres and sea trials beneath the Golden Gate."}
 ];
 var CAT={boatshow:{c:'#41647b',l:'Boat Show'},concours:{c:'#a2926f',l:'Concours'},owner:{c:'#5f7d8c',l:'Owner Event'}};
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -319,8 +316,8 @@ function fmtRange(e){var a=parse(e.start),b=parse(e.end);if(e.start===e.end)retu
 function sideDate(e){var a=parse(e.start),b=parse(e.end);var dy=(e.start===e.end)?(''+a.d):(a.d+'–'+b.d);return{mo:MON[a.m].toUpperCase(),dy:dy,yr:a.y};}
 function media(e){if(e.video)return '<video src="'+e.video+'" muted loop playsinline autoplay></video>';return '<img src="'+e.img+'" alt="">';}
 var fsteps=document.getElementById('fsteps'),fill=document.getElementById('flow-fill'),flow=document.getElementById('flow');
-fsteps.innerHTML=EVENTS.map(function(e){var sd=sideDate(e);
- return '<div class="fstep"><div class="fdate-side"><div class="mo">'+sd.mo+'</div><div class="dy">'+sd.dy+'</div></div><div class="fdot"></div>'+
+fsteps.innerHTML=EVENTS.map(function(e){
+ return '<div class="fstep"><div class="fdate-side">'+fmtRange(e)+'</div><div class="fdot"></div>'+
   '<div class="fcontent"><div class="floc">'+e.loc+'</div><h3>'+e.title+'</h3>'+
   '<p>'+e.desc+'</p><button class="fbtn">Request RSVP</button></div>'+
   '<div class="fmedia">'+media(e)+'</div></div>';
