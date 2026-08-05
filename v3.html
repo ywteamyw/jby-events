@@ -178,30 +178,41 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .to-top:hover{background:#000}.to-top svg{width:20px;height:20px}
 @media(max-width:860px){.foot-grid{grid-template-columns:1fr;align-items:flex-start}.foot-col{padding-top:0}.to-top{justify-self:start}}
 
-/* ===== EVENTS V3 — calendar ===== */
-.cal-wrap{max-width:1200px;margin:0 auto;padding:0 40px}
-.cal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.cal-title{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:26px;text-transform:uppercase;color:var(--ink)}
-.cal-nav{display:flex;gap:8px}
-.cal-nav button{width:38px;height:38px;border:1px solid var(--line);border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:.2s}
-.cal-nav button:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
-.cal-nav svg{width:16px;height:16px}
+/* ===== EVENTS V3 — calendar + list toggle ===== */
+.ev3{max-width:1200px;margin:0 auto;padding:0 40px}
+.ev3-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{padding:10px 22px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);transition:.2s;background:#fff}
+.seg button.on{background:var(--navy);color:#fff}
+.cal-nav-wrap{display:flex;align-items:center;gap:14px}
+.cnav{width:36px;height:36px;border:1px solid var(--line);border-radius:5px;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:.2s;background:#fff}
+.cnav:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.cnav svg{width:15px;height:15px}
+.cal-title{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:22px;text-transform:uppercase;color:var(--ink);min-width:180px;text-align:center}
 .cal-dow{display:grid;grid-template-columns:repeat(7,1fr)}
-.cal-dow span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-align:center;padding:12px 0}
+.cal-dow span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);text-align:center;padding:8px 0}
 .cal-weeks{border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
 .cal-week{position:relative;display:grid;grid-template-columns:repeat(7,1fr);border-top:1px solid var(--line)}
 .cal-week:first-child{border-top:0}
 .cal-day{border-left:1px solid var(--line)}
 .cal-day:first-child{border-left:0}
-.cal-day .dn{display:inline-block;font-size:13px;color:var(--mute);padding:8px 0 0 9px}
-.cal-day.out .dn{color:#d7dbe0}
+.cal-day .dn{display:inline-block;font-size:12px;color:var(--mute);padding:6px 0 0 8px}
+.cal-day.out .dn{color:#dde1e6}
 .cal-events{position:absolute;inset:0;pointer-events:none}
 .cal-ev{position:absolute;pointer-events:auto;cursor:pointer;overflow:hidden;border-radius:6px;background:#0a1620;box-shadow:0 6px 18px -12px rgba(20,30,45,.55)}
 .cal-ev img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s var(--ease)}
 .cal-ev:hover img{transform:scale(1.06)}
-.cal-ev .g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,32,0) 40%,rgba(65,100,123,.92) 100%)}
-.cal-ev .dn{position:absolute;top:7px;left:10px;color:#fff;font-size:12px;font-family:'Mesmerize',sans-serif;z-index:2;text-shadow:0 1px 5px rgba(0,0,0,.5)}
-.cal-ev .t{position:absolute;left:11px;right:11px;bottom:9px;color:#fff;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:12px;line-height:14px;text-transform:uppercase;z-index:2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.cal-ev .g{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,22,32,0) 38%,rgba(65,100,123,.92) 100%)}
+.cal-ev .dt{position:absolute;top:7px;left:10px;right:10px;color:#fff;font-family:'Mesmerize',sans-serif;font-size:11px;letter-spacing:.03em;text-transform:uppercase;z-index:2;text-shadow:0 1px 5px rgba(0,0,0,.55)}
+.cal-ev .t{position:absolute;left:10px;right:10px;bottom:8px;color:#fff;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:12px;line-height:14px;text-transform:uppercase;z-index:2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* list view */
+.list-view{max-width:960px}
+.lv-item{display:flex;gap:18px;align-items:center;padding:15px 6px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
+.lv-item:hover{background:var(--section)}
+.lv-thumb{width:96px;height:64px;border-radius:6px;object-fit:cover;flex:0 0 auto;background:var(--section)}
+.lv-date{font-family:'Mesmerize',sans-serif;font-size:14px;text-transform:uppercase;color:var(--navy);width:158px;flex:0 0 auto}
+.lv-body h4{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:18px;text-transform:uppercase;color:var(--ink)}
+.lv-body .l{font-size:14px;color:var(--mute);margin-top:2px}
 /* modal */
 .modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
 .modal.open{display:flex}
@@ -218,21 +229,13 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .modal-body p{font-size:16px;line-height:25px;color:#3a3a44;margin:0 0 22px}
 .modal-rsvp{display:inline-flex;align-items:center;height:46px;padding:0 26px;background:var(--navy);color:#fff;font-family:'Mesmerize',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border-radius:2px;transition:.2s;border:0;cursor:pointer}
 .modal-rsvp:hover{background:var(--navy-d)}
-/* upcoming */
-.upc{max-width:1200px;margin:0 auto;padding:64px 40px 0}
-.upc h3{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:18px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink);margin-bottom:8px}
-.upc .ui{display:flex;gap:16px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line);cursor:pointer;transition:padding-left .15s}
-.upc .ui:hover{padding-left:6px}
-.upc .ui .ud{flex:0 0 auto;width:130px;font-family:'Mesmerize',sans-serif;font-size:15px;text-transform:uppercase;color:var(--navy)}
-.upc .ui h4{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:17px;text-transform:uppercase;color:var(--ink)}
-.upc .ui .ul{font-size:14px;color:var(--mute);margin-left:auto}
 @media(max-width:760px){
- .cal-wrap{padding:0 20px}
- .cal-ev .t{font-size:10px;line-height:12px;left:7px;right:7px;bottom:6px}
- .cal-ev .dn{font-size:11px;top:5px;left:7px}
- .cal-day .dn{font-size:11px;padding:5px 0 0 6px}
- .upc{padding:48px 20px 0}
- .upc .ui .ul{display:none}
+ .ev3{padding:0 20px}
+ .cal-ev .t{font-size:9px;line-height:11px;left:6px;right:6px;bottom:5px}
+ .cal-ev .dt{font-size:9px;top:4px;left:6px;right:6px}
+ .cal-day .dn{font-size:10px;padding:4px 0 0 5px}
+ .lv-thumb{width:70px;height:50px}.lv-date{width:auto;font-size:12px}
+ .lv-item{flex-wrap:wrap;gap:10px}
  .modal-body{padding:22px}
 }
 </style>
@@ -273,21 +276,24 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
   <p>Boat shows, model premiers, sea trials, and owner gatherings across our home ports.</p>
 </section>
 
-<!-- CALENDAR (Events V3) -->
-<section class="cal-wrap" id="calendar">
-  <div class="cal-head"><div class="cal-title" id="cal-title"></div>
-    <div class="cal-nav">
-      <button id="cal-prev" aria-label="Previous month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <button id="cal-next" aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+<!-- CALENDAR + LIST (Events V3) -->
+<section class="ev3" id="calendar">
+  <div class="ev3-top">
+    <div class="seg">
+      <button data-view="calendar" class="on">Calendar</button>
+      <button data-view="list">List of Events</button>
+    </div>
+    <div class="cal-nav-wrap" id="cal-nav-wrap">
+      <button class="cnav" id="cal-prev" aria-label="Previous month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="cal-title" id="cal-title"></div>
+      <button class="cnav" id="cal-next" aria-label="Next month"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
     </div>
   </div>
-  <div class="cal-dow" id="cal-dow"></div>
-  <div class="cal-weeks" id="cal-weeks"></div>
-</section>
-
-<section class="upc" id="upcoming">
-  <h3>Upcoming Events</h3>
-  <div id="upc-list"></div>
+  <div class="cal-view" id="cal-view">
+    <div class="cal-dow" id="cal-dow"></div>
+    <div class="cal-weeks" id="cal-weeks"></div>
+  </div>
+  <div class="list-view" id="list-view" hidden></div>
 </section>
 
 <div class="modal" id="modal">
@@ -336,14 +342,12 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 </footer>
 
 <script>
-/* Nav scrolled + progress */
 var nav=document.getElementById('site-nav'),bar=document.querySelector('.progress-bar');
 function onScroll(){nav.classList.toggle('scrolled',window.scrollY>40);var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(h>0?(window.scrollY/h*100):0)+'%';}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
 document.querySelectorAll('[data-scroll]').forEach(function(b){b.addEventListener('click',function(){var t=document.querySelector(b.getAttribute('data-scroll'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
 var toTop=document.getElementById('to-top');if(toTop)toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 
-/* ===== EVENTS V3 calendar data ===== */
 var EVENTS=[
  {id:1,title:"Lake Tahoe Concours d'Elegance",start:"2026-08-07",end:"2026-08-08",loc:"Lake Tahoe, California",img:"./assets/ev_tahoe.jpg",desc:"Vintage wooden boats along the West Shore — a morning among the classics."},
  {id:2,title:"Riva Soir&eacute;e",start:"2026-08-09",end:"2026-08-09",loc:"Lake Tahoe, California",img:"./assets/ev_riva.jpg",desc:"An intimate evening aboard Riva as the sun sets over the lake."},
@@ -358,6 +362,7 @@ var WD=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 function parse(s){var p=s.split('-').map(Number);return{y:p[0],m:p[1]-1,d:p[2]};}
 function mk(s){var p=s.split('-').map(Number);return new Date(p[0],p[1]-1,p[2]);}
 function fmtRange(e){var a=parse(e.start),b=parse(e.end);if(e.start===e.end)return MON[a.m]+' '+a.d+', '+a.y;if(a.m===b.m)return MON[a.m]+' '+a.d+'–'+b.d+', '+a.y;return MON[a.m]+' '+a.d+' – '+MON[b.m]+' '+b.d+', '+a.y;}
+function tileDate(e){var a=parse(e.start),b=parse(e.end);if(e.start===e.end)return MON[a.m]+' '+a.d;if(a.m===b.m)return MON[a.m]+' '+a.d+'–'+b.d;return MON[a.m]+' '+a.d+'–'+MON[b.m]+' '+b.d;}
 function byId(id){return EVENTS.filter(function(x){return x.id==id;})[0];}
 var DAY=86400000;
 
@@ -368,6 +373,7 @@ function render(){
  var dim=new Date(state.y,state.m+1,0).getDate();
  var weeksCount=Math.ceil((startDow+dim)/7);
  var gridStart=new Date(state.y,state.m,1-startDow);
+ var rowH=Math.max(94,Math.floor(624/weeksCount));  /* fit calendar to ~one screen */
  document.getElementById('cal-title').textContent=MONL[state.m]+' '+state.y;
  document.getElementById('cal-dow').innerHTML=WD.map(function(w){return '<span>'+w+'</span>';}).join('');
  var html='',cursor=new Date(gridStart);
@@ -381,13 +387,12 @@ function render(){
   var lanes=[];
   segs.forEach(function(seg){var placed=false;for(var l=0;l<lanes.length;l++){var ok=lanes[l].every(function(o){return seg.s>o.en||seg.en<o.s;});if(ok){lanes[l].push(seg);seg.lane=l;placed=true;break;}}if(!placed){seg.lane=lanes.length;lanes.push([seg]);}});
   var laneCount=Math.max(1,lanes.length);
-  var rowH=Math.max(152,laneCount*112);
   var cells='';
   days.forEach(function(dt){cells+='<div class="cal-day'+(dt.getMonth()!==state.m?' out':'')+'"><span class="dn">'+dt.getDate()+'</span></div>';});
   var tiles='';
   segs.forEach(function(seg){var e=seg.e,span=seg.en-seg.s+1;var th=(rowH-(laneCount+1)*4)/laneCount;var top=4+seg.lane*(th+4);var left=seg.s/7*100,width=span/7*100;
     tiles+='<div class="cal-ev" data-id="'+e.id+'" style="left:calc('+left.toFixed(4)+'% + 3px);width:calc('+width.toFixed(4)+'% - 6px);top:'+top+'px;height:'+th+'px">'+
-      '<img src="'+e.img+'" alt=""><div class="g"></div><span class="dn">'+days[seg.s].getDate()+'</span><div class="t">'+e.title+'</div></div>';
+      '<img src="'+e.img+'" alt=""><div class="g"></div><div class="dt">'+tileDate(e)+'</div><div class="t">'+e.title+'</div></div>';
   });
   html+='<div class="cal-week" style="min-height:'+rowH+'px">'+cells+'<div class="cal-events">'+tiles+'</div></div>';
  }
@@ -398,10 +403,19 @@ document.getElementById('cal-prev').onclick=function(){state.m--;if(state.m<0){s
 document.getElementById('cal-next').onclick=function(){state.m++;if(state.m>11){state.m=0;state.y++;}render();};
 render();
 
-/* upcoming */
-document.getElementById('upc-list').innerHTML=EVENTS.slice().sort(function(a,b){return a.start<b.start?-1:1;}).map(function(e){
- return '<div class="ui" data-id="'+e.id+'"><div class="ud">'+fmtRange(e)+'</div><h4>'+e.title+'</h4><div class="ul">'+e.loc+'</div></div>';}).join('');
-document.querySelectorAll('.upc .ui').forEach(function(u){u.addEventListener('click',function(){openModal(u.getAttribute('data-id'));});});
+/* list view */
+document.getElementById('list-view').innerHTML=EVENTS.slice().sort(function(a,b){return a.start<b.start?-1:1;}).map(function(e){
+ return '<div class="lv-item" data-id="'+e.id+'"><img class="lv-thumb" src="'+e.img+'" alt=""><div class="lv-date">'+fmtRange(e)+'</div><div class="lv-body"><h4>'+e.title+'</h4><div class="l">'+e.loc+'</div></div></div>';}).join('');
+
+/* toggle */
+document.querySelectorAll('.seg button').forEach(function(b){b.onclick=function(){
+ document.querySelectorAll('.seg button').forEach(function(x){x.classList.toggle('on',x===b);});
+ var v=b.getAttribute('data-view'),cal=v==='calendar';
+ document.getElementById('cal-view').hidden=!cal;
+ document.getElementById('cal-nav-wrap').style.visibility=cal?'visible':'hidden';
+ document.getElementById('list-view').hidden=cal;
+};});
+document.querySelectorAll('.lv-item').forEach(function(u){u.addEventListener('click',function(){openModal(u.getAttribute('data-id'));});});
 
 /* modal */
 function openModal(id){var e=byId(id);
@@ -413,7 +427,6 @@ function closeModal(){document.getElementById('modal').classList.remove('open');
 document.querySelectorAll('[data-close]').forEach(function(x){x.addEventListener('click',closeModal);});
 document.addEventListener('keydown',function(ev){if(ev.key==='Escape')closeModal();});
 
-/* video autoplay kick */
 function kick(){document.querySelectorAll('video').forEach(function(v){var p=v.play();if(p&&p.catch)p.catch(function(){});});}
 kick();document.addEventListener('visibilitychange',function(){if(!document.hidden)kick();});
 </script>
