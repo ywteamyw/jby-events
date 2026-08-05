@@ -45,11 +45,11 @@ a{color:inherit;text-decoration:none}
 .nav .logo img{width:100%;height:100%;object-fit:contain;filter:brightness(0) invert(1)}
 .nav.scrolled .logo{width:60px;height:60px}
 .nav .right{display:flex;gap:12px;align-items:center;justify-self:end}
-.nav .icon{width:40px;height:40px;border:0.5px solid rgba(255,255,255,0.7);color:#fff;display:flex;align-items:center;justify-content:center;transition:.25s;background:transparent}
+.nav .icon{width:40px;height:40px;border:0.5px solid rgba(255,255,255,0.7);border-radius:2px;color:#fff;display:flex;align-items:center;justify-content:center;transition:.25s;background:transparent}
 .nav .icon:hover{background:rgba(255,255,255,0.14)}
 .nav .icon svg{width:18px;height:18px}
 .nav .cta{padding:0 24px;height:40px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;line-height:20px;
-  text-transform:uppercase;color:#fff;border:0.5px solid rgba(255,255,255,0.75);transition:.25s;display:inline-flex;align-items:center;white-space:nowrap}
+  text-transform:uppercase;color:#fff;border:0.5px solid rgba(255,255,255,0.75);border-radius:2px;transition:.25s;display:inline-flex;align-items:center;white-space:nowrap}
 .nav .cta:hover{background:rgba(255,255,255,0.14)}
 @media (max-width:980px){
   .nav{padding:16px 24px;grid-template-columns:auto auto auto}
@@ -178,36 +178,35 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .to-top:hover{background:#000}.to-top svg{width:20px;height:20px}
 @media(max-width:860px){.foot-grid{grid-template-columns:1fr;align-items:flex-start}.foot-col{padding-top:0}.to-top{justify-self:start}}
 
-/* ===== EVENTS V2 — vertical flow timeline ===== */
-.flow{position:relative;max-width:1440px;margin:0 auto;padding:0 40px}
-.flow-line{position:absolute;left:222px;top:0;height:0;width:2px;background:var(--line)}
-.flow-fill{position:absolute;left:222px;top:0;width:2px;height:0;background:var(--navy);z-index:1}
-.fstep{position:relative;display:grid;grid-template-columns:168px minmax(0,1fr) minmax(0,1.12fr);gap:40px;align-items:center;min-height:80vh}
-.fdot{position:absolute;left:182px;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#cfd3d8;border:3px solid var(--paper);z-index:2;transition:background .4s var(--ease),transform .4s var(--ease)}
+/* ===== EVENTS V2 — alternating (snake) timeline ===== */
+.flow{position:relative;max-width:1200px;margin:0 auto;padding:0 40px}
+.flow-line{position:absolute;left:50%;transform:translateX(-50%);top:0;height:0;width:2px;background:var(--line)}
+.flow-fill{position:absolute;left:50%;transform:translateX(-50%);top:0;height:0;width:2px;background:var(--navy);z-index:1}
+.fstep{position:relative;display:grid;grid-template-columns:1fr 1fr;column-gap:104px;align-items:center;min-height:78vh}
+.fdot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:14px;height:14px;border-radius:50%;background:#cfd3d8;border:3px solid var(--paper);z-index:2;transition:background .4s var(--ease),transform .4s var(--ease)}
 .fstep.active .fdot{background:var(--navy);transform:translate(-50%,-50%) scale(1.35)}
-.fdate-side{grid-column:1;justify-self:end;text-align:right;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:15px;line-height:20px;letter-spacing:.04em;text-transform:uppercase;color:#9aa0a8;white-space:nowrap;transition:color .4s var(--ease)}
-.fstep.active .fdate-side{color:var(--navy)}
-.fcontent{grid-column:2;opacity:.5;transition:opacity .5s var(--ease)}
-.fstep.active .fcontent{opacity:1}
-.fcontent h3{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:23px;line-height:30px;letter-spacing:0;text-transform:uppercase;color:var(--ink);margin:0 0 12px;text-wrap:balance}
-.fcontent .floc{font-family:'Myriad Pro',sans-serif;font-size:14px;letter-spacing:.04em;color:var(--mute);margin:0 0 10px}
-.fcontent p{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:17px;line-height:26px;color:#3a3a44;max-width:440px;margin:0 0 26px}
-.fbtn{display:inline-flex;align-items:center;height:44px;padding:0 24px;background:var(--navy);color:#fff;font-family:'Mesmerize',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border-radius:2px;transition:.2s;border:0;cursor:pointer}
-.fbtn:hover{background:var(--navy-d)}
-.fmedia{grid-column:3;position:relative;aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:var(--section);transform:scale(.74);opacity:.38;transition:transform .9s var(--ease),opacity .9s var(--ease)}
+.fmedia{position:relative;aspect-ratio:4/3;border-radius:2px;overflow:hidden;background:var(--section);transform:scale(.8);opacity:.5;transition:transform .85s var(--ease),opacity .85s var(--ease)}
 .fstep.active .fmedia{transform:scale(1);opacity:1}
 .fmedia img,.fmedia video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.fmedia .fcat{position:absolute;top:14px;left:14px;background:rgba(0,0,0,.5);color:#fff;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:3px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:inline-flex;align-items:center;gap:7px;z-index:2}
-.fmedia .fcat i{width:8px;height:8px;border-radius:50%}
-@media(max-width:900px){
+.fcontent{opacity:.5;transition:opacity .5s var(--ease)}
+.fstep.active .fcontent{opacity:1}
+.fcontent .fdate{font-family:'Mesmerize',sans-serif;font-size:15px;line-height:20px;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);margin-bottom:12px}
+.fcontent h3{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:26px;line-height:33px;text-transform:uppercase;color:var(--ink);margin:0 0 10px;text-wrap:balance}
+.fcontent .floc{font-family:'Myriad Pro',sans-serif;font-size:15px;color:var(--mute);margin-bottom:18px}
+.fcontent p{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:16px;line-height:25px;color:#3a3a44;margin:0 0 24px}
+.fbtn{display:inline-flex;align-items:center;height:44px;padding:0 24px;background:var(--navy);color:#fff;font-family:'Mesmerize',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;border-radius:2px;transition:.2s;border:0;cursor:pointer}
+.fbtn:hover{background:var(--navy-d)}
+/* alternate sides (snake) */
+.fstep:nth-child(even) .fmedia{order:2}
+.fstep:nth-child(even) .fcontent{order:1;text-align:right}
+@media(max-width:820px){
  .flow{padding:0 24px}
- .flow-line,.flow-fill{left:116px}
- .fstep{grid-template-columns:86px 1fr;gap:14px;min-height:auto;padding:44px 0}
- .fdot{left:92px}
- .fdate-side{font-size:12px;letter-spacing:.03em;white-space:normal}
+ .flow-line,.flow-fill,.fdot{display:none}
+ .fstep{grid-template-columns:1fr;column-gap:0;row-gap:20px;min-height:auto;padding:44px 0}
+ .fstep:nth-child(even) .fmedia{order:0}
+ .fstep:nth-child(even) .fcontent{order:0;text-align:left}
+ .fmedia{opacity:1;transform:none;aspect-ratio:16/10}
  .fcontent{opacity:1}
- .fmedia{grid-column:1 / -1;margin-top:18px;opacity:1;transform:none;aspect-ratio:16/10}
- .fcontent p{max-width:none}
 }
 </style>
 </head>
@@ -247,7 +246,7 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
   <p>Boat shows, model premiers, sea trials, and owner gatherings across our home ports.</p>
 </section>
 
-<!-- FLOW (Events V2 — scroll timeline) -->
+<!-- FLOW (Events V2 — snake timeline) -->
 <section class="flow" id="flow">
   <div class="flow-line"></div>
   <div class="flow-fill" id="flow-fill"></div>
@@ -291,40 +290,34 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 </footer>
 
 <script>
-/* Nav scrolled state + progress bar */
 var nav=document.getElementById('site-nav'),bar=document.querySelector('.progress-bar');
 function onScroll(){nav.classList.toggle('scrolled',window.scrollY>40);var h=document.documentElement.scrollHeight-window.innerHeight;bar.style.width=(h>0?(window.scrollY/h*100):0)+'%';}
 window.addEventListener('scroll',onScroll,{passive:true});onScroll();
-
-/* Smooth-scroll buttons + back-to-top */
 document.querySelectorAll('[data-scroll]').forEach(function(b){b.addEventListener('click',function(){var t=document.querySelector(b.getAttribute('data-scroll'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});});});
 var toTop=document.getElementById('to-top');if(toTop)toTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
 
-/* ===== EVENTS V2 flow ===== */
 var EVENTS=[
- {n:1,title:"Lake Tahoe Concours d'Elegance",start:"2026-08-07",end:"2026-08-08",loc:"Lake Tahoe, California",cat:"concours",img:"./assets/ev_tahoe.jpg",desc:"Vintage wooden boats along the West Shore — a morning among the classics."},
- {n:2,title:"Riva Soir&eacute;e",start:"2026-08-09",end:"2026-08-09",loc:"Lake Tahoe, California",cat:"owner",img:"./assets/ev_riva.jpg",desc:"An intimate evening aboard Riva as the sun sets over the lake."},
- {n:3,title:"Pebble Beach Concours d'Elegance",start:"2026-08-16",end:"2026-08-16",loc:"Pebble Beach, California",cat:"concours",img:"./assets/ev_pebble.jpg",desc:"The world's finest motorcars on the 18th fairway at Pebble Beach."},
- {n:4,title:"BRABUS VIP Owners Party",start:"2026-08-16",end:"2026-08-17",loc:"Monterey Peninsula, California",cat:"owner",img:"./assets/ev_brabus.jpg",desc:"A private owners' celebration in the heart of Monterey Car Week."},
- {n:5,title:"Cannes Yachting Festival",start:"2026-09-08",end:"2026-09-13",loc:"Cannes, France",cat:"boatshow",img:"./assets/ev_cannes.jpg",video:"./assets/past_1.mp4",desc:"First looks at the season's new launches in the Vieux Port."},
- {n:6,title:"Sausalito Boat Show",start:"2026-09-25",end:"2026-09-27",loc:"Sausalito, California",cat:"boatshow",img:"./assets/ev_sausalito.jpg",video:"./assets/past_2.mp4",desc:"Bay-side premieres and sea trials beneath the Golden Gate."}
+ {n:1,title:"Lake Tahoe Concours d'Elegance",start:"2026-08-07",end:"2026-08-08",loc:"Lake Tahoe, California",img:"./assets/ev_tahoe.jpg",desc:"Vintage wooden boats along the West Shore — a morning among the classics."},
+ {n:2,title:"Riva Soir&eacute;e",start:"2026-08-09",end:"2026-08-09",loc:"Lake Tahoe, California",img:"./assets/ev_riva.jpg",desc:"An intimate evening aboard Riva as the sun sets over the lake."},
+ {n:3,title:"Pebble Beach Concours d'Elegance",start:"2026-08-16",end:"2026-08-16",loc:"Pebble Beach, California",img:"./assets/ev_pebble.jpg",desc:"The world's finest motorcars on the 18th fairway at Pebble Beach."},
+ {n:4,title:"BRABUS VIP Owners Party",start:"2026-08-16",end:"2026-08-17",loc:"Monterey Peninsula, California",img:"./assets/ev_brabus.jpg",desc:"A private owners' celebration in the heart of Monterey Car Week."},
+ {n:5,title:"Cannes Yachting Festival",start:"2026-09-08",end:"2026-09-13",loc:"Cannes, France",img:"./assets/ev_cannes.jpg",video:"./assets/past_1.mp4",desc:"First looks at the season's new launches in the Vieux Port."},
+ {n:6,title:"Sausalito Boat Show",start:"2026-09-25",end:"2026-09-27",loc:"Sausalito, California",img:"./assets/ev_sausalito.jpg",video:"./assets/past_2.mp4",desc:"Bay-side premieres and sea trials beneath the Golden Gate."}
 ];
-var CAT={boatshow:{c:'#41647b',l:'Boat Show'},concours:{c:'#a2926f',l:'Concours'},owner:{c:'#5f7d8c',l:'Owner Event'}};
 var MON=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function parse(s){var p=s.split('-').map(Number);return{y:p[0],m:p[1]-1,d:p[2]};}
 function fmtRange(e){var a=parse(e.start),b=parse(e.end);if(e.start===e.end)return MON[a.m]+' '+a.d+', '+a.y;if(a.m===b.m)return MON[a.m]+' '+a.d+'–'+b.d+', '+a.y;return MON[a.m]+' '+a.d+' – '+MON[b.m]+' '+b.d+', '+a.y;}
-function sideDate(e){var a=parse(e.start),b=parse(e.end);var dy=(e.start===e.end)?(''+a.d):(a.d+'–'+b.d);return{mo:MON[a.m].toUpperCase(),dy:dy,yr:a.y};}
 function media(e){if(e.video)return '<video src="'+e.video+'" muted loop playsinline autoplay></video>';return '<img src="'+e.img+'" alt="">';}
 var fsteps=document.getElementById('fsteps'),fill=document.getElementById('flow-fill'),flow=document.getElementById('flow');
 fsteps.innerHTML=EVENTS.map(function(e){
- return '<div class="fstep"><div class="fdate-side">'+fmtRange(e)+'</div><div class="fdot"></div>'+
-  '<div class="fcontent"><div class="floc">'+e.loc+'</div><h3>'+e.title+'</h3>'+
-  '<p>'+e.desc+'</p><button class="fbtn">Request RSVP</button></div>'+
-  '<div class="fmedia">'+media(e)+'</div></div>';
+ return '<div class="fstep"><div class="fdot"></div>'+
+  '<div class="fmedia">'+media(e)+'</div>'+
+  '<div class="fcontent"><div class="fdate">'+fmtRange(e)+'</div><h3>'+e.title+'</h3><div class="floc">'+e.loc+'</div><p>'+e.desc+'</p><button class="fbtn">Request RSVP</button></div>'+
+ '</div>';
 }).join('');
 
 var steps=[].slice.call(document.querySelectorAll('.fstep'));
-function setActive(step){var wide=window.innerWidth>900;steps.forEach(function(s){var on=(s===step);s.classList.toggle('active',on);var m=s.querySelector('.fmedia');if(m){var full=on||!wide;m.style.transform=full?'scale(1)':'scale(0.74)';m.style.opacity=full?'1':'0.38';}});}
+function setActive(step){var wide=window.innerWidth>820;steps.forEach(function(s){var on=(s===step);s.classList.toggle('active',on);var m=s.querySelector('.fmedia');if(m){var full=on||!wide;m.style.transform=full?'scale(1)':'scale(0.8)';m.style.opacity=full?'1':'0.5';}});}
 var line=document.querySelector('.flow-line');
 function lineEnd(){var dr=steps[steps.length-1].querySelector('.fdot').getBoundingClientRect();var fr=flow.getBoundingClientRect();return Math.max(0,(dr.top+dr.height/2)-fr.top);}
 function setLine(){line.style.height=lineEnd()+'px';}
@@ -338,9 +331,8 @@ else{
  var ticking=false;window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(function(){updateFill();ticking=false;});}},{passive:true});
  setActive(steps[0]);updateFill();
 }
-window.addEventListener('resize',function(){setLine();updateFill();});
+window.addEventListener('resize',function(){setLine();updateFill();var a=document.querySelector('.fstep.active')||steps[0];setActive(a);});
 
-/* Ensure every video autoplays */
 function kick(){document.querySelectorAll('video').forEach(function(v){var p=v.play();if(p&&p.catch)p.catch(function(){});});}
 kick();document.addEventListener('visibilitychange',function(){if(!document.hidden)kick();});
 </script>
