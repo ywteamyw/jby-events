@@ -325,7 +325,7 @@ function buildSnake(){
  if(window.innerWidth<=820){progPath.setAttribute('d','');basePath.setAttribute('d','');sdots.innerHTML='';return;}
  var W=flow.clientWidth,H=flow.clientHeight,fr=flow.getBoundingClientRect();
  var Lx=26,Rx=W-26,r=28;
- var nodes=steps.map(function(s){var b=s.getBoundingClientRect();var d=s.querySelector('.fdate').getBoundingClientRect();return {top:b.top-fr.top,bot:b.bottom-fr.top,mid:(d.top+d.bottom)/2-fr.top};});
+ var nodes=steps.map(function(s){var b=s.getBoundingClientRect();return {top:b.top-fr.top,bot:b.bottom-fr.top,mid:(b.top+b.bottom)/2-fr.top};});
  function side(i){return i%2===0?Lx:Rx;}
  var d='M '+side(0)+' '+nodes[0].mid.toFixed(1);
  for(var i=0;i<nodes.length;i++){
