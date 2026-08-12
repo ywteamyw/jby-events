@@ -780,6 +780,40 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .leaflet-bar a{border-radius:0;color:var(--ink);border-bottom-color:var(--line)}
 .leaflet-bar a:first-child{border-top-left-radius:2px;border-top-right-radius:2px}
 .leaflet-bar a:last-child{border-bottom-left-radius:2px;border-bottom-right-radius:2px}
+/* ===== OFFICE MODAL (reused from home-page Locations modal) ===== */
+.loc-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:24px}
+.loc-modal.open{display:flex}
+.loc-modal-veil{position:absolute;inset:0;background:rgba(10,22,32,0.55);backdrop-filter:blur(4px);cursor:pointer}
+.loc-modal-panel{position:relative;background:var(--paper);width:min(680px,100%);max-height:90vh;overflow:auto;
+  border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,0.35);display:flex;flex-direction:column}
+.loc-modal-close{position:absolute;top:14px;right:14px;z-index:3;width:36px;height:36px;border-radius:2px;
+  background:rgba(255,255,255,0.95);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  color:var(--ink);font-size:18px;transition:.25s;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.loc-modal-close:hover{background:#fff}
+.loc-modal-photo{width:100%;aspect-ratio:2/1;background-size:cover;background-position:center;background-color:#1a2a3a}
+.loc-modal-body{padding:22px 30px 26px}
+.loc-modal-body h3{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:28px;line-height:36px;letter-spacing:0;
+  text-transform:uppercase;color:var(--ink);margin:0 0 6px}
+.loc-modal-subtitle{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:16px;line-height:22px;
+  color:var(--ink);margin:0 0 18px;text-transform:none;opacity:0.85}
+.loc-modal-info{margin:0 0 16px;padding:12px 0;border-top:0.5px solid var(--line);border-bottom:0.5px solid var(--line)}
+.loc-modal-row{display:grid;grid-template-columns:100px 1fr;gap:32px;padding:6px 0;margin:0}
+.loc-modal-row dt{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:13px;line-height:20px;
+  letter-spacing:0.08em;text-transform:uppercase;color:var(--mute);margin:0}
+.loc-modal-row dd{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:16px;line-height:24px;
+  color:var(--ink);margin:0}
+.loc-modal-row dd a{color:var(--ink);text-decoration:none;transition:color .2s}
+.loc-modal-row dd a:hover{color:var(--navy)}
+.loc-modal-ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.loc-modal-cta{display:inline-flex;align-items:center;gap:6px;padding:11px 20px;background:var(--navy);color:#fff;text-decoration:none;
+  font-family:'Mesmerize',sans-serif;font-weight:300;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;
+  border-radius:1px;transition:.25s}
+.loc-modal-cta i{font-size:16px;line-height:1}
+.loc-modal-cta:hover{background:#2c4a5c}
+.loc-modal-cta-secondary{display:inline-flex;align-items:center;padding:11px 20px;background:transparent;color:var(--ink);
+  text-decoration:none;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:14px;letter-spacing:0.08em;
+  text-transform:uppercase;border:0.5px solid rgba(0,0,0,0.25);border-radius:1px;transition:.25s}
+.loc-modal-cta-secondary:hover{border-color:var(--ink);background:rgba(0,0,0,0.03)}
 
 /* --- CATALOG SECTION (Yachts / Team) --- */
 .cat-section{padding-bottom:96px}
@@ -1182,6 +1216,27 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   });
 })();
 </script>
+<!-- Office modal (same design as the home-page Locations modal) -->
+<div class="loc-modal" id="office-modal" aria-hidden="true">
+  <div class="loc-modal-veil" data-omclose></div>
+  <div class="loc-modal-panel" role="dialog" aria-labelledby="om-title" aria-modal="true">
+    <button class="loc-modal-close" data-omclose aria-label="Close"><i class="ti ti-x"></i></button>
+    <div class="loc-modal-photo" id="om-photo"></div>
+    <div class="loc-modal-body">
+      <h3 id="om-title"></h3>
+      <p class="loc-modal-subtitle" id="om-subtitle"></p>
+      <dl class="loc-modal-info">
+        <div class="loc-modal-row"><dt>Address</dt><dd><a id="om-address" target="_blank" rel="noopener"></a></dd></div>
+        <div class="loc-modal-row"><dt>Phone</dt><dd><a id="om-phone"></a></dd></div>
+        <div class="loc-modal-row"><dt>Hours</dt><dd id="om-hours"></dd></div>
+      </dl>
+      <div class="loc-modal-ctas">
+        <a class="loc-modal-cta" id="om-directions" target="_blank" rel="noopener">Get directions <i class="ti ti-chevron-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ============================ INTERACTIVE MAPBOX MAP ============================
    Real, styled, zoomable map of every Jeff Brown Yachts office.
@@ -1191,38 +1246,60 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   var MAPBOX_TOKEN = 'pk.PASTE_YOUR_MAPBOX_TOKEN_HERE';
   var MAPBOX_STYLE = 'mapbox://styles/mapbox/light-v11'; // clean light base; swap for a custom JBY Studio style later
 
-  // Mapbox uses [lng, lat]
+  // Mapbox uses [lng, lat]. isMaritime -> title gets ": Maritime" (matches home).
   var OFFICES = [
-    {name:'San Diego Marina & Boatyard', type:'Boatyard', current:true,
-     addr:'2614 Shelter Island Drive, Suite A, San Diego, CA 92106', tel:'+16192229899', phone:'(619) 222-9899', coords:[-117.2300,32.7100]},
-    {name:'San Diego', type:'Sales Office',
-     addr:'2330 Shelter Island Drive, Suite 105, San Diego, CA 92106', tel:'+16192229899', phone:'(619) 222-9899', coords:[-117.1611,32.7157]},
-    {name:'Newport Harbor', type:'Maritime',
-     addr:'3101 West Coast Highway, Suite 130, Newport Beach, CA 92663', tel:'+19495243143', phone:'(949) 524-3143', coords:[-117.9298,33.6189]},
-    {name:'Marina del Rey', type:'Sales Office',
-     addr:'13900 Marquesas Way, Marina del Rey, CA 90292', tel:'+13102959236', phone:'(310) 295-9236', coords:[-118.4517,33.9802]},
-    {name:'Sausalito', type:'Sales Office',
-     addr:'300B Harbor Drive, Sausalito, CA 94965', tel:'+15107014880', phone:'(510) 701-4880', coords:[-122.4853,37.8590]},
-    {name:'Seattle', type:'Sales Office',
-     addr:'2288 W Commodore Way, Suite 110, Seattle, WA 98199', tel:'+12062745257', phone:'(206) 274-5257', coords:[-122.3321,47.6062]},
-    {name:'Kailua-Kona', type:'Sales Office',
-     addr:'73-4539 Iki Place, Kailua-Kona, HI 96740', tel:'+18089898305', phone:'(808) 989-8305', coords:[-155.9969,19.6400]},
-    {name:'Wrightsville Beach', type:'Sales Office',
-     addr:'100 Keel Street, Wrightsville Beach, NC 28480', tel:'+19106794158', phone:'(910) 679-4158', coords:[-77.7964,34.2085]},
-    {name:'Charleston', type:'Sales Office',
-     addr:'49 Immigration Street, Suite 101F, Charleston, SC 29403', tel:'+18432770777', phone:'(843) 277-0777', coords:[-79.9311,32.7765]}
+    {name:'San Diego Marina & Boatyard', current:true, photo:'office_san_diego_boatyard.png',
+     addr:'2614 Shelter Island Drive, Suite A, San Diego, CA 92106', tel:'+16192229899', phone:'(619) 222-9899',
+     hours:'Mon – Sat, 8am – 5pm', fact:'This full-service boatyard offers refit, repair, and rigging on the water.', coords:[-117.2300,32.7100]},
+    {name:'San Diego', photo:'office_san_diego.jpg',
+     addr:'2330 Shelter Island Drive, Suite 105, San Diego, CA 92106', tel:'+16192229899', phone:'(619) 222-9899',
+     hours:'Mon – Sat, 8am – 5pm', fact:'Our West Coast flagship, representing Axopar, BRABUS, Riva, and Pershing.', coords:[-117.1611,32.7157]},
+    {name:'Newport Harbor', maritime:true, photo:'office_newport_harbor.jpg',
+     addr:'3101 West Coast Highway, Suite 130, Newport Beach, CA 92663', tel:'+19495243143', phone:'(949) 524-3143',
+     hours:'Mon – Sat, 8am – 5pm', fact:'Our Newport Beach Maritime office. Private management and co-ownership programs.', coords:[-117.9298,33.6189]},
+    {name:'Marina del Rey', photo:'office_marina_del_rey.webp',
+     addr:'13900 Marquesas Way, Marina del Rey, CA 90292', tel:'+13102959236', phone:'(310) 295-9236',
+     hours:'Mon – Sat, 8am – 5pm', fact:'Our Los Angeles sales office, representing Axopar, BRABUS, and luxury brands.', coords:[-118.4517,33.9802]},
+    {name:'Sausalito', photo:'office_sausalito.jpg',
+     addr:'300B Harbor Drive, Sausalito, CA 94965', tel:'+15107014880', phone:'(510) 701-4880',
+     hours:'Mon – Sat, 8am – 5pm', fact:'Our Bay Area brokerage, representing Riva, Wally, and Pershing.', coords:[-122.4853,37.8590]},
+    {name:'Seattle', photo:'office_seattle.jpg',
+     addr:'2288 W Commodore Way, Suite 110, Seattle, WA 98199', tel:'+12062745257', phone:'(206) 274-5257',
+     hours:'Mon – Sat, 8am – 5pm', fact:'Our Pacific Northwest sales office, representing Axopar, BRABUS, and Riva.', coords:[-122.3321,47.6062]},
+    {name:'Kona', photo:'office_kona.jpg',
+     addr:'73-4539 Iki Place, Kailua-Kona, HI 96740', tel:'+18089898305', phone:'(808) 989-8305',
+     hours:'By appointment', fact:'Our Hawaiian outpost. Private viewings by appointment only.', coords:[-155.9969,19.6400]},
+    {name:'Wrightsville Beach', photo:'office_wrightsville_beach.jpg',
+     addr:'100 Keel Street, Wrightsville Beach, NC 28480', tel:'+19106794158', phone:'(910) 679-4158',
+     hours:'Mon – Sat, 8am – 5pm', fact:'Our East Coast sales office, representing Axopar, BRABUS, and Everglades.', coords:[-77.7964,34.2085]},
+    {name:'Charleston', photo:'office_charleston.jpg',
+     addr:'49 Immigration Street, Suite 101F, Charleston, SC 29403', tel:'+18432770777', phone:'(843) 277-0777',
+     hours:'Mon – Sat, 8am – 5pm', fact:'Our South Atlantic sales office, representing Axopar, Everglades, and BRABUS.', coords:[-79.9311,32.7765]}
   ];
 
-  function popupHTML(o){
-    var dir = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(o.addr);
-    return '<div class="jby-pop">'
-      + '<p class="jp-type">' + o.type + '</p>'
-      + '<p class="jp-name">' + o.name + '</p>'
-      + '<p class="jp-addr">' + o.addr + '</p>'
-      + '<a class="jp-tel" href="tel:' + o.tel + '">' + o.phone + '</a>'
-      + '<a class="jp-dir" href="' + dir + '" target="_blank" rel="noopener">Get directions</a>'
-      + (o.current ? '<div><span class="jp-here">You are here</span></div>' : '')
-      + '</div>';
+  // ---- Office modal (same design as the home Locations modal) ----
+  var modal = document.getElementById('office-modal');
+  function openOfficeModal(o){
+    if (!modal) return;
+    document.getElementById('om-photo').style.backgroundImage = "url('./JBY-V3.3-assets/" + o.photo + "')";
+    document.getElementById('om-title').textContent = o.name + (o.maritime ? ': Maritime' : '');
+    document.getElementById('om-subtitle').textContent = o.fact || '';
+    var a = document.getElementById('om-address');
+    a.textContent = o.addr;
+    a.setAttribute('href', 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(o.addr));
+    var p = document.getElementById('om-phone');
+    p.textContent = o.phone; p.setAttribute('href', 'tel:' + o.tel);
+    document.getElementById('om-hours').textContent = o.hours + (o.hours !== 'By appointment' ? '  · By appointment anytime' : '');
+    document.getElementById('om-directions').setAttribute('href', 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(o.addr));
+    modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow = 'hidden';
+  }
+  function closeOfficeModal(){
+    if (!modal) return;
+    modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow = '';
+  }
+  if (modal){
+    modal.querySelectorAll('[data-omclose]').forEach(function(el){ el.addEventListener('click', closeOfficeModal); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) closeOfficeModal(); });
   }
 
   var current = OFFICES.filter(function(o){return o.current;})[0] || OFFICES[0];
@@ -1241,9 +1318,9 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
     mapboxgl.accessToken = MAPBOX_TOKEN;
     var map = new mapboxgl.Map({
       container: 'jby-map', style: MAPBOX_STYLE, center: current.coords, zoom: 6,
-      attributionControl: false,
-      cooperativeGestures: true   // page keeps scrolling; ctrl/⌘+scroll or pinch to zoom, +/- buttons always work
+      attributionControl: false
     });
+    map.scrollZoom.enable();  // trackpad / mouse-wheel zoom like Google Maps
     map.addControl(new mapboxgl.NavigationControl({showCompass:false}), 'top-right');
     map.addControl(new mapboxgl.AttributionControl({compact:true}));
     map.on('load', function(){ map.resize(); });
@@ -1251,15 +1328,15 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
       var m = document.createElement('div');
       m.className = 'jby-marker' + (o.current ? ' current' : '');
       m.title = o.name;
-      var popup = new mapboxgl.Popup({offset:16, closeButton:true, focusAfterOpen:false}).setHTML(popupHTML(o));
-      new mapboxgl.Marker({element:m, anchor:'center'}).setLngLat(o.coords).setPopup(popup).addTo(map);
+      m.addEventListener('click', function(ev){ ev.stopPropagation(); openOfficeModal(o); });
+      new mapboxgl.Marker({element:m, anchor:'center'}).setLngLat(o.coords).addTo(map);
     });
   }
 
   // --- Leaflet + CARTO Positron (no token needed; live now) ---
   function initLeaflet(el){
     // Leaflet uses [lat, lng]
-    var map = L.map('jby-map', { scrollWheelZoom:false, zoomControl:true, attributionControl:true })
+    var map = L.map('jby-map', { scrollWheelZoom:true, zoomControl:true, attributionControl:true, wheelPxPerZoomLevel:90 })
                 .setView([current.coords[1], current.coords[0]], 6);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       subdomains:'abcd', maxZoom:19,
@@ -1270,10 +1347,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
       var icon = L.divIcon({
         className:'jby-divicon',
         html:'<div class="jby-marker' + (o.current ? ' current' : '') + '"></div>',
-        iconSize:[sz,sz], iconAnchor:[sz/2,sz/2], popupAnchor:[0,-sz/2]
+        iconSize:[sz,sz], iconAnchor:[sz/2,sz/2]
       });
       L.marker([o.coords[1], o.coords[0]], { icon:icon, title:o.name })
-        .bindPopup(popupHTML(o), { closeButton:true, maxWidth:280 })
+        .on('click', function(){ openOfficeModal(o); })
         .addTo(map);
     });
     setTimeout(function(){ map.invalidateSize(); }, 200);
