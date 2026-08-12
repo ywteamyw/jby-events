@@ -290,27 +290,30 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 }
 
 /* ============================== EVENT FILTERS (Brand + Location) ============================== */
-.ev-filters{max-width:1200px;margin:0 auto;padding:4px 40px 2px}
-.filt-row{display:flex;align-items:flex-start;gap:18px;margin-bottom:12px;flex-wrap:wrap}
-.filt-label{flex:0 0 auto;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);padding-top:9px;min-width:78px}
-.filt-pills{display:flex;flex-wrap:wrap;gap:8px}
-.filt-pill{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:14px;line-height:1;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:2px;padding:9px 16px;cursor:pointer;transition:background .18s,color .18s,border-color .18s}
-.filt-pill:hover{border-color:rgba(0,0,0,0.28)}
-.filt-pill.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.ev-filters{max-width:1200px;margin:0 auto;padding:0 40px 8px}
+.filt-row{display:flex;align-items:baseline;gap:6px 10px;margin-bottom:6px;flex-wrap:wrap}
+.filt-label{flex:0 0 auto;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);min-width:76px}
+.filt-pills{display:flex;flex-wrap:wrap;gap:2px 24px}
+.filt-pill{position:relative;background:none;border:none;padding:0 0 7px;cursor:pointer;font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:15px;line-height:26px;color:#8a8a92;transition:color .2s}
+.filt-pill::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--navy);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.filt-pill:hover{color:var(--ink)}
+.filt-pill.on{color:var(--navy)}
+.filt-pill.on::after{transform:scaleX(1)}
 .lv-empty{padding:56px 0;text-align:center;color:var(--mute);font-family:'Myriad Pro',sans-serif;font-size:17px}
 /* ============================== PAST EVENTS — restructured (video + caption + button) ============================== */
 .pe-card{height:auto;overflow:visible;background:transparent;display:flex;flex-direction:column}
 .pe-media{position:relative;width:100%;height:clamp(380px,56vh,560px);border-radius:2px;overflow:hidden;background:#0a1620}
 .pe-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.pe-media .pe-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,0.55) 100%)}
-.pe-media .pe-title{position:absolute;left:48px;right:48px;bottom:40px;z-index:3;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:24px;line-height:34px;letter-spacing:0;text-transform:uppercase;color:#fff}
-.pe-cap{padding:22px 4px 4px;display:flex;flex-direction:column;align-items:flex-start;gap:16px;max-width:760px}
+.pe-media .pe-grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 30%,rgba(0,0,0,0.72) 100%)}
+.pe-overlay{position:absolute;left:48px;right:48px;bottom:40px;z-index:3;display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+.pe-overlay .pe-title{position:static;left:auto;right:auto;bottom:auto;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:24px;line-height:34px;letter-spacing:0;text-transform:uppercase;color:#fff;margin:0}
+.pe-cap{padding:20px 4px 4px;max-width:760px}
 .pe-desc{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:16px;line-height:24px;color:var(--mute);margin:0}
-.pe-btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 24px;border:1px solid var(--ink);border-radius:2px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);background:transparent;text-decoration:none;transition:.22s;cursor:pointer}
-.pe-btn:hover{background:var(--ink);color:#fff}
+.pe-btn{display:inline-flex;align-items:center;gap:10px;height:46px;padding:0 26px;border:1px solid rgba(255,255,255,0.72);border-radius:2px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:rgba(0,0,0,0.20);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);text-decoration:none;transition:.22s;cursor:pointer}
+.pe-btn:hover{background:#fff;color:var(--ink);border-color:#fff}
 .pe-btn svg{width:16px;height:16px}
 .pe-nav{top:clamp(190px,28vh,280px)}
-@media (max-width:900px){.pe-media{height:clamp(300px,46vh,440px)}.pe-media .pe-title{left:24px;right:24px;bottom:24px;font-size:19px;line-height:28px}.pe-nav{top:clamp(150px,23vh,220px)}}
+@media (max-width:900px){.pe-media{height:clamp(300px,46vh,440px)}.pe-overlay{left:24px;right:24px;bottom:24px;gap:14px}.pe-overlay .pe-title{font-size:19px;line-height:28px}.pe-btn{height:42px;padding:0 20px}.pe-nav{top:clamp(150px,23vh,220px)}}
 </style>
 </head>
 <body>
@@ -406,11 +409,10 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
             <source src="./assets/past_1.mp4" type="video/mp4">
           </video>
           <div class="pe-grad"></div>
-          <div class="pe-title">Fort Lauderdale International Boat Show</div>
-        </div>
-        <div class="pe-cap">
-          <p class="pe-desc">Our brands on the water in Florida — flagship debuts, sea trials, and first looks alongside the JBY team.</p>
-          <a class="pe-btn" href="#" data-kc="fort-lauderdale-international-boat-show">Explore This Event <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <div class="pe-overlay">
+            <div class="pe-title">Fort Lauderdale International Boat Show</div>
+            <a class="pe-btn" href="#" data-kc="fort-lauderdale-international-boat-show">Explore This Event <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
         </div>
       </div>
       <div class="pe-card">
@@ -419,11 +421,10 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
             <source src="./assets/past_2.mp4" type="video/mp4">
           </video>
           <div class="pe-grad"></div>
-          <div class="pe-title">Beaufort Axopar Adventure</div>
-        </div>
-        <div class="pe-cap">
-          <p class="pe-desc">A Lowcountry run aboard the latest Axopar models — an unhurried day of coves, sandbars, and open water.</p>
-          <a class="pe-btn" href="#" data-kc="beaufort-axopar-adventure">Explore This Event <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <div class="pe-overlay">
+            <div class="pe-title">Beaufort Axopar Adventure</div>
+            <a class="pe-btn" href="#" data-kc="beaufort-axopar-adventure">Explore This Event <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
         </div>
       </div>
     </div>
