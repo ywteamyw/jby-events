@@ -735,6 +735,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .oi-cell p{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:20px;line-height:28px;letter-spacing:0;
   color:var(--mute);margin:0}
 .oi-cell .oi-sm{font-size:16px;line-height:24px}
+.oi-cell a{color:inherit;text-decoration:none;transition:color .2s;cursor:pointer}
+.oi-cell a:hover{color:var(--navy)}
 .ob-photo{width:652px;height:367px;border-radius:2px;overflow:hidden}
 .ob-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.22,1,.36,1)}
 .ob-photo:hover img{transform:scale(1.05)}
@@ -843,18 +845,20 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 
 /* --- TEAM CARDS --- */
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.team-card{position:relative;height:406px;border-radius:2px;overflow:hidden;background:rgba(255,255,255,0.8)}
-.team-card .t-img{position:absolute;inset:0;background-size:cover;background-position:center top;
+.team-card{position:relative;aspect-ratio:325/406;border-radius:2px;overflow:hidden;background:#e9edf1}
+.team-card .t-photo{position:absolute;inset:0;overflow:hidden}
+.team-card .t-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block;
   transition:transform .7s cubic-bezier(.22,1,.36,1)}
-.team-card:hover .t-img{transform:scale(1.06)}
-.team-card .t-panel{position:absolute;left:12px;right:12px;bottom:12px;
-  background:rgba(255,255,255,0.90);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);
-  border-radius:2px;padding:16px;display:flex;flex-direction:column;gap:8px}
-.team-card .t-office{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:14px;line-height:20px;color:var(--ink)}
-.team-card .t-meta{display:flex;flex-direction:column;gap:4px}
-.team-card .t-name{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;line-height:24px;letter-spacing:0;
-  text-transform:uppercase;color:var(--ink);margin:0}
-.team-card .t-role{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:16px;line-height:24px;color:var(--mute);margin:0}
+.team-card:hover .t-photo img{transform:scale(1.06)}
+.team-card .t-foot{position:absolute;left:12px;right:12px;bottom:12px;display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.team-card .t-tag{font-family:'Myriad Pro',sans-serif;font-size:14px;line-height:1;letter-spacing:0.06em;text-transform:uppercase;
+  color:#fff;background:rgba(65,100,123,0.94);padding:6px 11px;border-radius:2px}
+.team-card .t-label{width:100%;display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:2px;background:rgba(255,255,255,0.9)}
+.team-card .t-office{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:16px;line-height:20px;color:var(--navy)}
+.team-card .t-nr{display:flex;flex-direction:column;gap:4px}
+.team-card .t-name{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;line-height:22px;letter-spacing:0;
+  text-transform:uppercase;color:#111;margin:0}
+.team-card .t-role{font-family:'Myriad Pro',sans-serif;font-weight:300;font-size:16px;line-height:21px;color:var(--mute);margin:0}
 
 /* --- PAGINATION --- */
 .pager{display:flex;gap:16px;align-items:center;justify-content:center;margin-top:40px}
@@ -899,7 +903,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   .ob-title{font-size:24px;line-height:34px}
 }
 @media (prefers-reduced-motion:reduce){
-  .vrow,.vrow .vessel-card.reveal,.ob-photo img,.team-card .t-img{transition:none}
+  .vrow,.vrow .vessel-card.reveal,.ob-photo img,.team-card .t-photo img{transition:none}
 }
 .magnetic{transform:none!important}
 .foot-locs{display:flex;flex-direction:column;gap:14px;margin:0}
@@ -928,7 +932,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="ob-info reveal">
           <div class="oi-cell">
             <h3>Location</h3>
-            <p>2614 Shelter Island Drive, Suite A<br/>San Diego, CA 92106</p>
+            <p><a href="https://www.google.com/maps/search/?api=1&amp;query=2614+Shelter+Island+Drive,+Suite+A,+San+Diego,+CA+92106" target="_blank" rel="noopener" aria-label="Open in Google Maps">2614 Shelter Island Drive, Suite A<br/>San Diego, CA 92106</a></p>
           </div>
           <div class="oi-cell">
             <h3>Working hours</h3>
@@ -936,11 +940,11 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
           </div>
           <div class="oi-cell">
             <h3>Email</h3>
-            <p>info@jeffbrownyachts.com</p>
+            <p><a href="mailto:info@jeffbrownyachts.com">info@jeffbrownyachts.com</a></p>
           </div>
           <div class="oi-cell">
             <h3>Phone</h3>
-            <p>(888) 693-8099</p>
+            <p><a href="tel:+16192229899">+1 (619) 222-9899</a></p>
           </div>
         </div>
         <div class="ob-photo reveal d1"><img src="./JBY-V3.3-assets/office_building.png" alt="The Olde Boatyard — San Diego Marina &amp; Boatyard"/></div>
@@ -960,7 +964,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_axopar_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Axopar 37 XC Cross Cabin Wet Bar</p>
           <p class="price">$349,000</p>
         </div>
@@ -971,7 +975,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_pershing_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Pershing 5X Sport Yacht</p>
           <p class="price">$349,000</p>
         </div>
@@ -982,7 +986,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_brabus_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Brabus Shadow 900 Sun-Top</p>
           <p class="price">$349,000</p>
         </div>
@@ -993,7 +997,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_pershing_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Pershing GT55 Sport Yacht</p>
           <p class="price">$349,000</p>
         </div>
@@ -1006,7 +1010,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_axopar_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Axopar 37 XC Cross Cabin Wet Bar</p>
           <p class="price">$349,000</p>
         </div>
@@ -1017,7 +1021,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_pershing_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Pershing 5X Sport Yacht</p>
           <p class="price">$349,000</p>
         </div>
@@ -1028,7 +1032,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_brabus_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Brabus Shadow 900 Sun-Top</p>
           <p class="price">$349,000</p>
         </div>
@@ -1039,7 +1043,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="v-img-veil"></div>
         <div class="brand"><img src="./JBY-V3.3-assets/brand_pershing_raw.png" alt=""/></div>
         <div class="info">
-          <div class="chip-loc">Seattle, WA</div>
+          <div class="chip-loc">San Diego, CA</div>
           <p class="name">2023 Pershing GT55 Sport Yacht</p>
           <p class="price">$349,000</p>
         </div>
@@ -1065,47 +1069,37 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
     <h2 class="cat-title reveal split-words" data-split>Team Members at This Office</h2>
     <div class="team-grid">
       <article class="team-card reveal d1">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_jeff_brown.png')"></div>
-        <div class="t-panel"><span class="t-office">San Diego Office</span><div class="t-meta"><h3 class="t-name">Jeff Brown</h3><p class="t-role">Owner</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_chris_thompson.jpg" alt="Chris Thompson" loading="lazy"/></div>
+        <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Chris Thompson</span><span class="t-role">Service Manager</span></div></div></div>
       </article>
       <article class="team-card reveal d2">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_melina_monninger.png')"></div>
-        <div class="t-panel"><span class="t-office">San Diego Office</span><div class="t-meta"><h3 class="t-name">Melina Monninger</h3><p class="t-role">Marketing Manager</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_annie_snyder.jpg" alt="Annie Snyder" loading="lazy"/></div>
+        <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Annie Snyder</span><span class="t-role">Lead Service Technician</span></div></div></div>
       </article>
       <article class="team-card reveal d3">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_allen_jones.png')"></div>
-        <div class="t-panel"><span class="t-office">Newport Harbor Office</span><div class="t-meta"><h3 class="t-name">Allen Jones</h3><p class="t-role">Sales Professional &amp; Mari-Time Manager</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_ryan_heffernan.jpg" alt="Ryan Heffernan-Anderson" loading="lazy"/></div>
+        <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Ryan Heffernan-Anderson</span><span class="t-role">Service Technician</span></div></div></div>
       </article>
       <article class="team-card reveal d4">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_adam_aronson.png')"></div>
-        <div class="t-panel"><span class="t-office">San Diego Office</span><div class="t-meta"><h3 class="t-name">Adam Aronson</h3><p class="t-role">Accounting Manager</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_hailey_jones.jpg" alt="Hailey Jones" loading="lazy"/></div>
+        <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Hailey Jones</span><span class="t-role">Service Technician</span></div></div></div>
       </article>
       <article class="team-card reveal d1">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_karen_brown.png')"></div>
-        <div class="t-panel"><span class="t-office">San Diego Office</span><div class="t-meta"><h3 class="t-name">Karen Brown</h3><p class="t-role">Cruise Director</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_brock_passarella.jpg" alt="Brock Passarella" loading="lazy"/></div>
+        <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Brock Passarella</span><span class="t-role">Service Coordinator</span></div></div></div>
       </article>
       <article class="team-card reveal d2">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_ryan_anderson.png')"></div>
-        <div class="t-panel"><span class="t-office">San Diego Office</span><div class="t-meta"><h3 class="t-name">Ryan Anderson</h3><p class="t-role">Sales Professional</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_esmeralda_rivera.jpg" alt="Esmeralda Rivera" loading="lazy"/></div>
+        <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Esmeralda Rivera</span><span class="t-role">Chief Detailing Specialist</span></div></div></div>
       </article>
       <article class="team-card reveal d3">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_andy_witherspoon.png')"></div>
-        <div class="t-panel"><span class="t-office">Kona Office</span><div class="t-meta"><h3 class="t-name">Andy Witherspoon</h3><p class="t-role">Sales Professional</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_gabriela_pacheco.jpg" alt="Gabriela Pacheco" loading="lazy"/></div>
+        <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Gabriela Pacheco</span><span class="t-role">Detailing Specialist</span></div></div></div>
       </article>
       <article class="team-card reveal d4">
-        <div class="t-img" style="background-image:url('./JBY-V3.3-assets/team_will_dejong.png')"></div>
-        <div class="t-panel"><span class="t-office">Newport Harbor Office</span><div class="t-meta"><h3 class="t-name">Will De Jong</h3><p class="t-role">Sales Professional</p></div></div>
+        <div class="t-photo"><img src="./JBY-V3.3-assets/r_brad_butler.jpg" alt="Brad Butler" loading="lazy"/></div>
+        <div class="t-foot"><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Brad Butler</span><span class="t-role">In Memoriam</span></div></div></div>
       </article>
-    </div>
-    <div class="pager reveal" aria-label="Team pagination">
-      <button class="pg-back" type="button"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
-      <div class="pg-nums">
-        <button class="pg-num active" type="button">1</button>
-        <button class="pg-num" type="button">2</button>
-        <button class="pg-num" type="button">3</button>
-        <button class="pg-num" type="button">4</button>
-      </div>
-      <button class="pg-next" type="button">Next<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </section>
@@ -1261,7 +1255,14 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   // Public, domain-locked Mapbox token (restricted to jeffbrownyachts.com) — safe in client
   // code. Assembled from parts so GitHub's secret-scanner false-positive doesn't block pushes.
   var MAPBOX_TOKEN = 'pk.' + 'eyJ1IjoiaGVpZ29wIiwiYSI6ImNtc3Jlc' + 'mUxOTAybHIyd3B6Nmg2NnF2bWoifQ.SG3e_SKUkcE6ncuI28PveQ';
-  var MAPBOX_STYLE = 'mapbox://styles/mapbox/light-v11'; // clean light base; swap for a custom JBY Studio style later
+  // ---- MAP LOOK (handoff) — keep Mapbox (prod) and Leaflet (staging fallback) in sync ----
+  // Prod renders Mapbox with this style; staging/localhost mirror it with CARTO Positron
+  // (grayscale light = closest match to light-v11). To finalise the exact JBY look, build a
+  // custom style in Mapbox Studio and paste its URL here (one-line swap) — nothing else changes.
+  var MAPBOX_STYLE = 'mapbox://styles/mapbox/light-v11';
+  // Default view: THIS office in focus (its pin is the highlighted/primary marker).
+  // Zoom out (down to MAP_MIN_ZOOM) to reveal the other JBY offices.
+  var MAP_ZOOM = 12, MAP_MIN_ZOOM = 3, MAP_MAX_ZOOM = 16;
 
   // Mapbox uses [lng, lat]. isMaritime -> title gets ": Maritime" (matches home).
   var OFFICES = [
@@ -1342,8 +1343,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   function initMapbox(el){
     mapboxgl.accessToken = MAPBOX_TOKEN;
     var map = new mapboxgl.Map({
-      container: 'jby-map', style: MAPBOX_STYLE, center: current.coords, zoom: 6,
-      attributionControl: false
+      container: 'jby-map', style: MAPBOX_STYLE, center: current.coords, zoom: MAP_ZOOM,
+      minZoom: MAP_MIN_ZOOM, maxZoom: MAP_MAX_ZOOM, attributionControl: false
     });
     map.scrollZoom.enable();  // trackpad / mouse-wheel zoom like Google Maps
     map.addControl(new mapboxgl.NavigationControl({showCompass:false}), 'top-right');
@@ -1361,8 +1362,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   // --- Leaflet + CARTO Positron (no token needed; live now) ---
   function initLeaflet(el){
     // Leaflet uses [lat, lng]
-    var map = L.map('jby-map', { scrollWheelZoom:true, zoomControl:true, attributionControl:true, wheelPxPerZoomLevel:90 })
-                .setView([current.coords[1], current.coords[0]], 6);
+    var map = L.map('jby-map', { scrollWheelZoom:true, zoomControl:true, attributionControl:true,
+                  wheelPxPerZoomLevel:90, minZoom:MAP_MIN_ZOOM, maxZoom:MAP_MAX_ZOOM })
+                .setView([current.coords[1], current.coords[0]], MAP_ZOOM);
+    // CARTO Positron = grayscale light basemap, the closest match to Mapbox light-v11 (prod)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       subdomains:'abcd', maxZoom:19,
       attribution:'&copy; OpenStreetMap &copy; CARTO'
