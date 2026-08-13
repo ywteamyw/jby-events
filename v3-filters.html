@@ -327,6 +327,7 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .facet-block button.on{color:#111;font-weight:400}
 .facet-block button.on .lbl{box-shadow:inset 0 -1.5px 0 currentColor;padding-bottom:3px}
 .facet-block button .n{font-size:16px;opacity:0.7;font-variant-numeric:tabular-nums}
+.facet-block button.zero{opacity:0.4}
 @media (max-width:1000px){
   .ev3-body{grid-template-columns:1fr;gap:22px}
   .ev-facets{position:static}
@@ -537,6 +538,7 @@ function byId(id){return EVENTS.filter(function(x){return x.id==id;})[0];}
 var DAY=86400000;
 
 var filter={brand:'all',loc:'all'};
+var view='calendar';
 function matches(e){var b=filter.brand,l=filter.loc;var okB=(b==='all')||(e.brands&&e.brands.indexOf(b)>=0);var okL=(l==='all')||e.allLocations||(e.locations&&e.locations.indexOf(l)>=0);return okB&&okL;}
 function shownEvents(){return EVENTS.filter(matches);}
 var state={y:2026,m:7};
@@ -572,8 +574,8 @@ function render(){
  document.getElementById('cal-weeks').innerHTML=html;
  document.querySelectorAll('.cal-ev').forEach(function(t){t.addEventListener('click',function(){openModal(t.getAttribute('data-id'));});});
 }
-document.getElementById('cal-prev').onclick=function(){state.m--;if(state.m<0){state.m=11;state.y--;}render();};
-document.getElementById('cal-next').onclick=function(){state.m++;if(state.m>11){state.m=0;state.y++;}render();};
+document.getElementById('cal-prev').onclick=function(){state.m--;if(state.m<0){state.m=11;state.y--;}render();renderFacets();};
+document.getElementById('cal-next').onclick=function(){state.m++;if(state.m>11){state.m=0;state.y++;}render();renderFacets();};
 
 /* list view */
 var lvIO=new IntersectionObserver(function(entries){entries.forEach(function(en){en.target.classList.toggle('in',en.isIntersecting);});},{threshold:0.16,rootMargin:'0px 0px -8% 0px'});
@@ -600,15 +602,20 @@ document.querySelectorAll('.seg button').forEach(function(b){b.onclick=function(
  document.getElementById('cal-view').hidden=!cal;
  document.getElementById('cal-nav-wrap').style.visibility=cal?'visible':'hidden';
  document.getElementById('list-view').hidden=cal;
+ view=cal?'calendar':'list';renderFacets();
  if(!cal)requestAnimationFrame(syncReveal);
 };});
 
 /* filters (sidebar facets, Team-page style) */
 var LOCS=[['all','All locations'],['san-diego','San Diego'],['newport-harbor','Newport Harbor'],['marina-del-rey','Marina del Rey'],['sausalito','Sausalito'],['seattle','Seattle'],['kona','Kona'],['wrightsville-beach','Wrightsville Beach'],['charleston','Charleston']];
 var BRANDS=[['all','All brands'],['riva','Riva'],['axopar','Axopar'],['brabus','BRABUS']];
-function locCount(k){return k==='all'?EVENTS.length:EVENTS.filter(function(e){return e.allLocations||(e.locations&&e.locations.indexOf(k)>=0);}).length;}
-function brandCount(k){return k==='all'?EVENTS.length:EVENTS.filter(function(e){return e.brands&&e.brands.indexOf(k)>=0;}).length;}
-function facetBtns(items,attr,active,countFn){return items.map(function(o){return '<button data-'+attr+'="'+o[0]+'"'+(active===o[0]?' class="on"':'')+'><span class="lbl">'+o[1]+'</span><span class="n">'+countFn(o[0])+'</span></button>';}).join('');}
+function inMonth(e){var ms=new Date(state.y,state.m,1),me=new Date(state.y,state.m+1,0);return mk(e.end)>=ms&&mk(e.start)<=me;}
+function scopeEvents(){return view==='list'?EVENTS:EVENTS.filter(inMonth);}
+function matchLoc(e,k){return k==='all'||e.allLocations||(e.locations&&e.locations.indexOf(k)>=0);}
+function matchBrand(e,k){return k==='all'||(e.brands&&e.brands.indexOf(k)>=0);}
+function locCount(k){return scopeEvents().filter(function(e){return matchBrand(e,filter.brand)&&matchLoc(e,k);}).length;}
+function brandCount(k){return scopeEvents().filter(function(e){return matchLoc(e,filter.loc)&&matchBrand(e,k);}).length;}
+function facetBtns(items,attr,active,countFn){return items.map(function(o){var c=countFn(o[0]);var cls=(active===o[0]?'on':'')+((c===0&&active!==o[0])?' zero':'');return '<button data-'+attr+'="'+o[0]+'"'+(cls.trim()?' class="'+cls.trim()+'"':'')+'><span class="lbl">'+o[1]+'</span><span class="n">'+c+'</span></button>';}).join('');}
 function renderFacets(){
  document.getElementById('facet-location').innerHTML='<h3>Location</h3>'+facetBtns(LOCS,'loc',filter.loc,locCount);
  document.getElementById('facet-brand').innerHTML='<h3>Brand</h3>'+facetBtns(BRANDS,'brand',filter.brand,brandCount);
