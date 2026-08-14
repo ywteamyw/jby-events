@@ -592,7 +592,7 @@ function renderList(){
     '<p class="lv-meta">'+fmtRange(e)+' <span class="dot">|</span> '+e.loc+'</p>'+
     '<button class="lv-btn">See details</button></div>'+
   '</article>';}).join('') : '<div class="lv-empty">No events match these filters. Try \u201cAll\u201d.</div>';
- document.querySelectorAll('#list-view .lv-btn').forEach(function(u){u.addEventListener('click',function(ev){ev.stopPropagation();var r=u.closest('.lv-row');if(r)openModal(r.getAttribute('data-id'));});});
+ /* List of Events: 'See Details' does not open the modal (modal is calendar-only) */
  document.querySelectorAll('#list-view .lv-reveal').forEach(function(el){lvIO.observe(el);});
  requestAnimationFrame(syncReveal);
 }
