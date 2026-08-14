@@ -220,7 +220,7 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .modal-card{position:relative;background:#fff;border-radius:2px;overflow:hidden;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px -30px rgba(0,0,0,.55)}
 .modal-media{position:relative;aspect-ratio:16/9;background:#0a1620}
 .modal-media img,.modal-media video{width:100%;height:100%;object-fit:cover}
-.modal-close{position:absolute;top:14px;right:14px;z-index:3;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:0;cursor:pointer}
+.modal-close{position:absolute;top:14px;right:14px;z-index:3;width:40px;height:40px;border-radius:2px;background:rgba(0,0,0,.5);color:#fff;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:0;cursor:pointer}
 .modal-close svg{width:18px;height:18px}
 .modal-body{padding:26px 30px 30px}
 .modal-body .md{font-family:'Mesmerize',sans-serif;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--navy)}
@@ -244,7 +244,7 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .lv-row{display:grid;grid-template-columns:1.28fr 1fr;gap:60px;align-items:center;margin:0 auto 64px;max-width:1080px}
 .lv-row.reverse{grid-template-columns:1fr 1.28fr}
 .lv-row:last-child{margin-bottom:6px}
-.lv-media{position:relative;overflow:hidden;border-radius:2px;aspect-ratio:16/11;background:var(--section);order:1;cursor:pointer}
+.lv-media{position:relative;overflow:hidden;border-radius:2px;aspect-ratio:16/11;background:var(--section);order:1}
 .lv-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 1.4s var(--ease)}
 .lv-media:hover img{transform:scale(1.12)}
 .lv-copy{max-width:440px;order:2}
@@ -592,7 +592,7 @@ function renderList(){
     '<p class="lv-meta">'+fmtRange(e)+' <span class="dot">|</span> '+e.loc+'</p>'+
     '<button class="lv-btn">See details</button></div>'+
   '</article>';}).join('') : '<div class="lv-empty">No events match these filters. Try \u201cAll\u201d.</div>';
- document.querySelectorAll('#list-view .lv-row').forEach(function(u){u.addEventListener('click',function(){openModal(u.getAttribute('data-id'));});});
+ document.querySelectorAll('#list-view .lv-btn').forEach(function(u){u.addEventListener('click',function(ev){ev.stopPropagation();var r=u.closest('.lv-row');if(r)openModal(r.getAttribute('data-id'));});});
  document.querySelectorAll('#list-view .lv-reveal').forEach(function(el){lvIO.observe(el);});
  requestAnimationFrame(syncReveal);
 }
@@ -634,7 +634,7 @@ renderList();
 /* modal */
 function openModal(id){var e=byId(id);
  document.getElementById('modal-media').innerHTML=e.video?'<video src="'+e.video+'" autoplay loop muted playsinline></video>':'<img src="'+e.img+'" alt="">';
- document.getElementById('modal-body').innerHTML='<div class="md">'+fmtRange(e)+'</div><h3>'+e.title+'</h3><div class="loc">'+e.loc+'</div><p>'+e.desc+'</p><button class="modal-rsvp">Request RSVP</button>';
+ document.getElementById('modal-body').innerHTML='<div class="md">'+fmtRange(e)+'</div><h3>'+e.title+'</h3><div class="loc">'+e.loc+'</div><p>'+e.desc+'</p><button class="modal-rsvp">See Details</button>';
  document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden';
 }
 function closeModal(){document.getElementById('modal').classList.remove('open');document.getElementById('modal-media').innerHTML='';document.body.style.overflow='';}
