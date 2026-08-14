@@ -309,10 +309,11 @@ footer{background:var(--paper);padding:40px 40px;color:var(--mute);font-size:14p
 .pe-overlay .pe-title{position:static;left:auto;right:auto;bottom:auto;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:24px;line-height:34px;letter-spacing:0;text-transform:uppercase;color:#fff;margin:0}
 .pe-cap{padding:20px 4px 4px;max-width:760px}
 .pe-desc{font-family:'Myriad Pro',sans-serif;font-weight:400;font-size:16px;line-height:24px;color:var(--mute);margin:0}
-.pe-btn{display:inline-flex;align-items:center;height:48px;padding:0 24px;border:1px solid rgba(255,255,255,0.9);border-radius:2px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:14px;line-height:20px;letter-spacing:0;text-transform:uppercase;color:#fff;background:rgba(255,255,255,0.01);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-decoration:none;transition:.25s;cursor:pointer}
+.pe-btn{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 24px;border:1px solid rgba(255,255,255,0.9);border-radius:2px;font-family:'Mesmerize',sans-serif;font-weight:300;font-size:14px;line-height:20px;letter-spacing:0;text-transform:uppercase;color:#fff;background:rgba(255,255,255,0.01);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);text-decoration:none;transition:.25s;cursor:pointer}
 .pe-btn:hover{background:rgba(255,255,255,0.14)}
 .pe-nav{top:clamp(190px,28vh,280px)}
-@media (max-width:900px){.pe-media{height:clamp(300px,46vh,440px)}.pe-overlay{left:24px;right:24px;bottom:24px;gap:14px}.pe-overlay .pe-title{font-size:19px;line-height:28px}.pe-btn{height:44px;padding:0 22px}.pe-nav{top:clamp(150px,23vh,220px)}}
+@media (max-width:900px){.pe-media{height:clamp(300px,46vh,440px)}.pe-overlay{left:24px;right:24px;bottom:24px;gap:14px}.pe-overlay .pe-title{font-size:19px;line-height:28px}.pe-btn{height:44px;padding:0 22px}
+.pe-btn svg{width:16px;height:16px;flex:0 0 auto}.pe-nav{top:clamp(150px,23vh,220px)}}
 
 /* ============================== SIDEBAR FILTERS + LAYOUT (Team-style) ============================== */
 .intro{max-width:1440px;text-align:left}
@@ -437,7 +438,7 @@ footer{background:var(--paper);padding:40px 40px 80px;color:var(--mute);font-siz
           <div class="pe-grad"></div>
           <div class="pe-overlay">
             <div class="pe-title">Fort Lauderdale International Boat Show</div>
-            <a class="pe-btn" href="#" data-kc="fort-lauderdale-international-boat-show">Explore This Event</a>
+            <a class="pe-btn" href="#" data-kc="fort-lauderdale-international-boat-show">Explore This Event <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </div>
@@ -449,7 +450,7 @@ footer{background:var(--paper);padding:40px 40px 80px;color:var(--mute);font-siz
           <div class="pe-grad"></div>
           <div class="pe-overlay">
             <div class="pe-title">Beaufort Axopar Adventure</div>
-            <a class="pe-btn" href="#" data-kc="beaufort-axopar-adventure">Explore This Event</a>
+            <a class="pe-btn" href="#" data-kc="beaufort-axopar-adventure">Explore This Event <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a>
           </div>
         </div>
       </div>
@@ -492,7 +493,7 @@ footer{background:var(--paper);padding:40px 40px 80px;color:var(--mute);font-siz
       </nav>
     </div>
     <div class="foot-col">
-      <h6>Contact us</h6><p>(888) 693-8099</p>
+      <h6>Contact us</h6><p>+1 (888) 693-8099</p>
       <h6>Email</h6><p>info@jeffbrownyachts.com</p>
       <h6>Social Media</h6>
       <div class="foot-social">
@@ -615,7 +616,7 @@ function matchLoc(e,k){return k==='all'||e.allLocations||(e.locations&&e.locatio
 function matchBrand(e,k){return k==='all'||(e.brands&&e.brands.indexOf(k)>=0);}
 function locCount(k){return scopeEvents().filter(function(e){return matchBrand(e,filter.brand)&&matchLoc(e,k);}).length;}
 function brandCount(k){return scopeEvents().filter(function(e){return matchLoc(e,filter.loc)&&matchBrand(e,k);}).length;}
-function facetBtns(items,attr,active,countFn){return items.map(function(o){var c=countFn(o[0]);var cls=(active===o[0]?'on':'')+((c===0&&active!==o[0])?' zero':'');return '<button data-'+attr+'="'+o[0]+'"'+(cls.trim()?' class="'+cls.trim()+'"':'')+'><span class="lbl">'+o[1]+'</span><span class="n">'+c+'</span></button>';}).join('');}
+function facetBtns(items,attr,active,countFn){return items.filter(function(o){return o[0]==='all'||active===o[0]||countFn(o[0])>0;}).map(function(o){var c=countFn(o[0]);var on=active===o[0];return '<button data-'+attr+'="'+o[0]+'"'+(on?' class="on"':'')+'><span class="lbl">'+o[1]+'</span><span class="n">'+c+'</span></button>';}).join('');}
 function renderFacets(){
  document.getElementById('facet-location').innerHTML='<h3>Location</h3>'+facetBtns(LOCS,'loc',filter.loc,locCount);
  document.getElementById('facet-brand').innerHTML='<h3>Brand</h3>'+facetBtns(BRANDS,'brand',filter.brand,brandCount);
