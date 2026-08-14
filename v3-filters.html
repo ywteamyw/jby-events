@@ -624,7 +624,8 @@ function renderFacets(){
  document.querySelectorAll('#facet-location button').forEach(function(b){b.onclick=function(){filter.loc=b.getAttribute('data-loc');refresh();};});
  document.querySelectorAll('#facet-brand button').forEach(function(b){b.onclick=function(){filter.brand=b.getAttribute('data-brand');refresh();};});
 }
-function refresh(){renderFacets();render();renderList();}
+function scrollListTop(){var el=document.getElementById("calendar");if(!el)return;var nav=document.getElementById("site-nav");var off=(nav?nav.offsetHeight:80)+16;window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-off,behavior:"smooth"});}
+function refresh(){renderFacets();render();renderList();if(view==='list')scrollListTop();}
 
 /* init */
 renderFacets();
