@@ -599,7 +599,7 @@ footer{background:var(--paper);padding:40px 40px 80px;color:var(--mute);font-siz
   transition:opacity .2s}
 .foot-social a svg{width:28px;height:28px;display:block}
 .foot-social a:hover{opacity:0.6}
-.back-top{position:absolute;right:40px;top:152px;width:40px;height:40px;border:0;
+.back-top{position:absolute;right:40px;top:61px;width:40px;height:40px;border:0;
   background:rgba(0,0,0,0.7);border-radius:2px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
 .back-top:hover{background:rgba(0,0,0,0.85)}
@@ -822,26 +822,30 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .cat-title{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:32px;line-height:48px;letter-spacing:0;
   text-transform:uppercase;color:var(--ink);margin:0 0 56px}
 
-/* Vessel rows — premium horizontal expand on hover (like home): hovered card
-   grows, neighbours shrink. Each row is its own grid so :has(:nth-child) is per-row. */
-.vrow{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;
-  transition:grid-template-columns .55s cubic-bezier(.22,1,.36,1)}
-.vrow + .vrow{margin-top:20px}
-.vrow:has(.vessel-card:nth-child(1):hover){grid-template-columns:1.5fr 1fr 1fr 1fr}
-.vrow:has(.vessel-card:nth-child(2):hover){grid-template-columns:1fr 1.5fr 1fr 1fr}
-.vrow:has(.vessel-card:nth-child(3):hover){grid-template-columns:1fr 1fr 1.5fr 1fr}
-.vrow:has(.vessel-card:nth-child(4):hover){grid-template-columns:1fr 1fr 1fr 1.5fr}
-.vrow .vessel-card{height:390px}
+/* Yachts — section header row: title + "View all yachts" CTA */
+.cat-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin:0 0 40px}
+.cat-head .cat-title{margin:0}
+.cat-cta{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:14px;line-height:1;letter-spacing:0.02em;
+  text-transform:uppercase;color:var(--ink);background:transparent;border:0.5px solid rgba(0,0,0,0.20);border-radius:2px;
+  height:44px;padding:0 26px;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap;cursor:pointer;
+  transition:background .25s,color .25s,border-color .25s}
+.cat-cta:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* Yachts — one horizontal scroll rail (no pagination) */
+.vstrip{display:flex;gap:20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  scrollbar-width:none;padding:2px 0 10px}
+.vstrip::-webkit-scrollbar{display:none}
+.vstrip .vessel-card{flex:0 0 334px;height:390px;scroll-snap-align:start}
 
 /* re-enable scroll reveal on vessel cards (home base CSS disables it) */
-.vrow .vessel-card.reveal{opacity:0;transform:translate3d(0,42px,0);
+.vstrip .vessel-card.reveal{opacity:0;transform:translate3d(0,42px,0);
   transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);
   will-change:opacity,transform}
-.vrow .vessel-card.reveal.in{opacity:1;transform:none}
-.vrow .vessel-card.reveal.d1{transition-delay:.08s}
-.vrow .vessel-card.reveal.d2{transition-delay:.16s}
-.vrow .vessel-card.reveal.d3{transition-delay:.24s}
-.vrow .vessel-card.reveal.d4{transition-delay:.32s}
+.vstrip .vessel-card.reveal.in{opacity:1;transform:none}
+.vstrip .vessel-card.reveal.d1{transition-delay:.06s}
+.vstrip .vessel-card.reveal.d2{transition-delay:.12s}
+.vstrip .vessel-card.reveal.d3{transition-delay:.18s}
+.vstrip .vessel-card.reveal.d4{transition-delay:.24s}
 
 /* --- TEAM CARDS --- */
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -890,7 +894,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   .ob-left,.ob-map{flex:1 1 auto;max-width:none;width:100%}
   .ob-photo{width:100%}
   .ob-map{height:auto;aspect-ratio:652/591}
-  .vrow{grid-template-columns:repeat(2,1fr) !important}
   .team-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:680px){
@@ -900,13 +903,10 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   .ob-info{grid-template-columns:1fr}
   .cat-title{font-size:24px;line-height:36px}
   .ob-title{font-size:24px;line-height:34px}
-  /* Yachts + Team: swipeable horizontal card rail (like the brand page) */
-  .vrow{display:flex !important;grid-template-columns:none !important;gap:14px;
-    overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-    scrollbar-width:none;margin:0 -20px;padding:0 20px 4px}
-  .vrow::-webkit-scrollbar{display:none}
-  .vrow + .vrow{margin-top:14px}
-  .vrow .vessel-card{flex:0 0 84%;scroll-snap-align:start}
+  .cat-head{margin-bottom:28px}
+  /* Yachts + Team: swipeable horizontal card rail bleeds to the screen edges */
+  .vstrip{gap:14px;margin:0 -20px;padding:0 20px 4px}
+  .vstrip .vessel-card{flex:0 0 84%}
   .team-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
     -webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -20px;padding:0 20px 4px}
   .team-grid::-webkit-scrollbar{display:none}
@@ -919,7 +919,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   .help .btn-ghost{width:100%}
 }
 @media (prefers-reduced-motion:reduce){
-  .vrow,.vrow .vessel-card.reveal,.ob-photo img,.team-card .t-photo img{transition:none}
+  .vstrip .vessel-card.reveal,.ob-photo img,.team-card .t-photo img{transition:none}
 }
 .magnetic{transform:none!important}
 .foot-locs{display:flex;flex-direction:column;gap:14px;margin:0}
@@ -978,8 +978,11 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 <!-- ======================= YACHTS LISTED AT THIS OFFICE ======================= -->
 <section class="cat-section" id="yachts">
   <div class="cat-inner">
-    <h2 class="cat-title reveal split-words" data-split>Yachts Listed at This Office</h2>
-    <div class="vrow">
+    <div class="cat-head">
+      <h2 class="cat-title reveal split-words" data-split>Yachts Listed at This Office</h2>
+      <a class="cat-cta reveal" href="#" aria-label="View all yachts">View all yachts</a>
+    </div>
+    <div class="vstrip">
       <article class="vessel-card reveal d1">
         <div class="v-img" style="background-image:url('./JBY-V3.3-assets/03_vessel1_axopar.jpg')"></div>
         <div class="v-img-veil"></div>
@@ -1024,8 +1027,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         </div>
         <button class="v-cta" aria-label="View yacht"><span class="v-cta-text">View</span><span class="v-cta-icon"><i class="ti ti-chevron-right"></i></span></button>
       </article>
-    </div>
-    <div class="vrow">
       <article class="vessel-card reveal d1">
         <div class="v-img" style="background-image:url('./JBY-V3.3-assets/03_vessel1_axopar.jpg')"></div>
         <div class="v-img-veil"></div>
@@ -1070,16 +1071,6 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         </div>
         <button class="v-cta" aria-label="View yacht"><span class="v-cta-text">View</span><span class="v-cta-icon"><i class="ti ti-chevron-right"></i></span></button>
       </article>
-    </div>
-    <div class="pager reveal" aria-label="Yacht listings pagination">
-      <button class="pg-back" type="button"><svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M10 3.5 5.5 8l4.5 4.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</button>
-      <div class="pg-nums">
-        <button class="pg-num active" type="button">1</button>
-        <button class="pg-num" type="button">2</button>
-        <button class="pg-num" type="button">3</button>
-        <button class="pg-num" type="button">4</button>
-      </div>
-      <button class="pg-next" type="button">Next<svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </section>
