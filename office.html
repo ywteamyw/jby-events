@@ -909,6 +909,15 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .foot-locs{display:flex;flex-direction:column;gap:14px;margin:0}
 .foot-locs a{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;line-height:20px;letter-spacing:0;text-transform:uppercase;color:var(--ink);text-decoration:none;transition:color .2s}
 .foot-locs a:hover{color:var(--navy)}
+
+/* standard site footer: uppercase locations list, no street address */
+.foot-locs{display:flex;flex-direction:column;gap:14px;margin:0}
+.foot-locs a{font-family:'Mesmerize',sans-serif;font-weight:300;font-size:16px;line-height:20px;letter-spacing:0;text-transform:uppercase;color:var(--ink,#2f2f39);text-decoration:none;transition:color .2s}
+.foot-locs a:hover{color:#41647b}
+/* back-to-top sits at the top right of the footer, level with the logo */
+footer{position:relative}
+.to-top{position:absolute;top:52px;right:40px;margin-top:0;justify-self:auto;align-self:auto}
+@media (max-width:960px){.to-top{top:44px;right:24px}}
 </style>
 </head>
 <body>
