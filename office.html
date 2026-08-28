@@ -397,7 +397,7 @@ a{color:inherit;text-decoration:none}
 
 /* Mobile fallback: horizontal scroll, no hover expand */
 @media (max-width:980px){
-  .vessels-strip{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;
+  .vessels-strip{display:flex;overflow-x:auto;scroll-snap-type:x proximity;scrollbar-width:none;
     grid-template-columns:none}
   .vessels-strip::-webkit-scrollbar{display:none}
   .vessels-strip:has(.vessel-card:nth-child(1):hover),
@@ -832,7 +832,7 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .cat-cta:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
 
 /* Yachts — one horizontal scroll rail (no pagination) */
-.vstrip{display:flex;gap:20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+.vstrip{display:flex;gap:20px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
   scrollbar-width:none;padding:2px 0 10px}
 .vstrip::-webkit-scrollbar{display:none}
 .vstrip .vessel-card{flex:0 0 334px;height:390px;scroll-snap-align:start}
@@ -846,6 +846,17 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 .vstrip .vessel-card.reveal.d2{transition-delay:.12s}
 .vstrip .vessel-card.reveal.d3{transition-delay:.18s}
 .vstrip .vessel-card.reveal.d4{transition-delay:.24s}
+
+/* Rail wrapper + scroll chevron */
+.strip-wrap{position:relative}
+.strip-arr{position:absolute;right:12px;top:50%;transform:translateY(-50%);z-index:6;
+  width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,0.95);color:var(--ink);
+  border:0.5px solid rgba(0,0,0,0.10);box-shadow:0 6px 20px rgba(0,0,0,0.20);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:background .2s,box-shadow .2s}
+.strip-arr:hover{background:#fff;box-shadow:0 8px 26px rgba(0,0,0,0.26)}
+.strip-arr svg{width:22px;height:22px;display:block}
+.team-wrap .strip-arr{display:none}   /* team is a full grid on desktop — no rail, no arrow */
 
 /* --- TEAM CARDS --- */
 .team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
@@ -904,13 +915,15 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   .cat-title{font-size:24px;line-height:36px}
   .ob-title{font-size:24px;line-height:34px}
   .cat-head{margin-bottom:28px}
-  /* Yachts + Team: swipeable horizontal card rail bleeds to the screen edges */
-  .vstrip{gap:14px;margin:0 -20px;padding:0 20px 4px}
+  /* Yachts + Team: swipeable horizontal card rail — first card stays aligned with the title */
+  .vstrip{gap:14px}
   .vstrip .vessel-card{flex:0 0 84%}
-  .team-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;
-    -webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -20px;padding:0 20px 4px}
+  .team-grid{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
   .team-grid::-webkit-scrollbar{display:none}
   .team-grid .team-card{flex:0 0 78%;scroll-snap-align:start}
+  .team-wrap .strip-arr{display:flex}   /* team becomes a rail on phones -> show its arrow */
+  .strip-arr{right:6px}
   /* Help band: title on one line + full-width button */
   .help{padding:56px 20px}
   .help-inner{gap:24px;width:100%}
@@ -982,7 +995,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
       <h2 class="cat-title reveal split-words" data-split>Yachts Listed at This Office</h2>
       <a class="cat-cta reveal" href="#" aria-label="View all yachts">View all yachts</a>
     </div>
-    <div class="vstrip">
+    <div class="strip-wrap">
+      <div class="vstrip">
       <article class="vessel-card reveal d1">
         <div class="v-img" style="background-image:url('./JBY-V3.3-assets/03_vessel1_axopar.jpg')"></div>
         <div class="v-img-veil"></div>
@@ -1071,6 +1085,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         </div>
         <button class="v-cta" aria-label="View yacht"><span class="v-cta-text">View</span><span class="v-cta-icon"><i class="ti ti-chevron-right"></i></span></button>
       </article>
+      </div>
+      <button class="strip-arr" type="button" aria-label="Scroll yachts" onclick="stripScroll(this)"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </section>
@@ -1079,7 +1095,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
 <section class="cat-section team-section" id="team">
   <div class="cat-inner">
     <h2 class="cat-title reveal split-words" data-split>Team Members at This Office</h2>
-    <div class="team-grid">
+    <div class="strip-wrap team-wrap">
+      <div class="team-grid">
       <article class="team-card reveal d1">
         <div class="t-photo"><img src="./JBY-V3.3-assets/r_chris_thompson.jpg" alt="Chris Thompson" loading="lazy"/></div>
         <div class="t-foot"><span class="t-tag">Service</span><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Chris Thompson</span><span class="t-role">Service Manager</span></div></div></div>
@@ -1112,6 +1129,8 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
         <div class="t-photo"><img src="./JBY-V3.3-assets/r_brad_butler.jpg" alt="Brad Butler" loading="lazy"/></div>
         <div class="t-foot"><div class="t-label"><span class="t-office">San Diego Marina &amp; Boatyard</span><div class="t-nr"><span class="t-name">Brad Butler</span><span class="t-role">In Memoriam</span></div></div></div>
       </article>
+      </div>
+      <button class="strip-arr" type="button" aria-label="Scroll team" onclick="stripScroll(this)"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     </div>
   </div>
 </section>
@@ -1399,6 +1418,22 @@ a:focus-visible,button:focus-visible,[role="button"]:focus-visible,input:focus-v
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMap);
   else initMap();
 })();
+</script>
+<script>
+/* Chevron scroll for the yacht / team rails — advances one card; loops to start at the end */
+function stripScroll(btn){
+  var wrap = btn.closest('.strip-wrap');
+  var rail = wrap && (wrap.querySelector('.vstrip') || wrap.querySelector('.team-grid'));
+  if (!rail) return;
+  var card = rail.querySelector('.vessel-card, .team-card');
+  var gap = parseFloat(getComputedStyle(rail).columnGap || getComputedStyle(rail).gap) || 20;
+  var step = card ? card.getBoundingClientRect().width + gap : 340;
+  if (rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 8){
+    rail.scrollTo({ left: 0, behavior: 'smooth' });
+  } else {
+    rail.scrollBy({ left: step, behavior: 'smooth' });
+  }
+}
 </script>
 </body>
 </html>
